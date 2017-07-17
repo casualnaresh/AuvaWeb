@@ -1,0 +1,3946 @@
+USE [atmdb]
+GO
+/****** Object:  ForeignKey [FK_Account_Manager_Account]    Script Date: 07/10/2017 18:54:21 ******/
+IF  EXISTS (SELECT * FROM sys.foreign_keys WHERE object_id = OBJECT_ID(N'[dbo].[FK_Account_Manager_Account]') AND parent_object_id = OBJECT_ID(N'[dbo].[Account_Manager]'))
+ALTER TABLE [dbo].[Account_Manager] DROP CONSTRAINT [FK_Account_Manager_Account]
+GO
+/****** Object:  ForeignKey [FK_Account_Manager_Manager]    Script Date: 07/10/2017 18:54:21 ******/
+IF  EXISTS (SELECT * FROM sys.foreign_keys WHERE object_id = OBJECT_ID(N'[dbo].[FK_Account_Manager_Manager]') AND parent_object_id = OBJECT_ID(N'[dbo].[Account_Manager]'))
+ALTER TABLE [dbo].[Account_Manager] DROP CONSTRAINT [FK_Account_Manager_Manager]
+GO
+/****** Object:  ForeignKey [FK_Account_Transaction_Account]    Script Date: 07/10/2017 18:54:21 ******/
+IF  EXISTS (SELECT * FROM sys.foreign_keys WHERE object_id = OBJECT_ID(N'[dbo].[FK_Account_Transaction_Account]') AND parent_object_id = OBJECT_ID(N'[dbo].[Account_Transaction]'))
+ALTER TABLE [dbo].[Account_Transaction] DROP CONSTRAINT [FK_Account_Transaction_Account]
+GO
+/****** Object:  ForeignKey [FK_Account_Transaction_Transaction]    Script Date: 07/10/2017 18:54:21 ******/
+IF  EXISTS (SELECT * FROM sys.foreign_keys WHERE object_id = OBJECT_ID(N'[dbo].[FK_Account_Transaction_Transaction]') AND parent_object_id = OBJECT_ID(N'[dbo].[Account_Transaction]'))
+ALTER TABLE [dbo].[Account_Transaction] DROP CONSTRAINT [FK_Account_Transaction_Transaction]
+GO
+/****** Object:  ForeignKey [FK_Client_Account_Account]    Script Date: 07/10/2017 18:54:21 ******/
+IF  EXISTS (SELECT * FROM sys.foreign_keys WHERE object_id = OBJECT_ID(N'[dbo].[FK_Client_Account_Account]') AND parent_object_id = OBJECT_ID(N'[dbo].[Client_Account]'))
+ALTER TABLE [dbo].[Client_Account] DROP CONSTRAINT [FK_Client_Account_Account]
+GO
+/****** Object:  ForeignKey [FK_Client_Account_Client]    Script Date: 07/10/2017 18:54:21 ******/
+IF  EXISTS (SELECT * FROM sys.foreign_keys WHERE object_id = OBJECT_ID(N'[dbo].[FK_Client_Account_Client]') AND parent_object_id = OBJECT_ID(N'[dbo].[Client_Account]'))
+ALTER TABLE [dbo].[Client_Account] DROP CONSTRAINT [FK_Client_Account_Client]
+GO
+/****** Object:  ForeignKey [FK_Client_Moneycard_Client]    Script Date: 07/10/2017 18:54:22 ******/
+IF  EXISTS (SELECT * FROM sys.foreign_keys WHERE object_id = OBJECT_ID(N'[dbo].[FK_Client_Moneycard_Client]') AND parent_object_id = OBJECT_ID(N'[dbo].[Client_Moneycard]'))
+ALTER TABLE [dbo].[Client_Moneycard] DROP CONSTRAINT [FK_Client_Moneycard_Client]
+GO
+/****** Object:  ForeignKey [FK_Client_Moneycard_Moneycard]    Script Date: 07/10/2017 18:54:22 ******/
+IF  EXISTS (SELECT * FROM sys.foreign_keys WHERE object_id = OBJECT_ID(N'[dbo].[FK_Client_Moneycard_Moneycard]') AND parent_object_id = OBJECT_ID(N'[dbo].[Client_Moneycard]'))
+ALTER TABLE [dbo].[Client_Moneycard] DROP CONSTRAINT [FK_Client_Moneycard_Moneycard]
+GO
+/****** Object:  ForeignKey [FK_Client_Payee_Client]    Script Date: 07/10/2017 18:54:22 ******/
+IF  EXISTS (SELECT * FROM sys.foreign_keys WHERE object_id = OBJECT_ID(N'[dbo].[FK_Client_Payee_Client]') AND parent_object_id = OBJECT_ID(N'[dbo].[Client_Payee]'))
+ALTER TABLE [dbo].[Client_Payee] DROP CONSTRAINT [FK_Client_Payee_Client]
+GO
+/****** Object:  ForeignKey [FK_Client_Payee_Payee]    Script Date: 07/10/2017 18:54:22 ******/
+IF  EXISTS (SELECT * FROM sys.foreign_keys WHERE object_id = OBJECT_ID(N'[dbo].[FK_Client_Payee_Payee]') AND parent_object_id = OBJECT_ID(N'[dbo].[Client_Payee]'))
+ALTER TABLE [dbo].[Client_Payee] DROP CONSTRAINT [FK_Client_Payee_Payee]
+GO
+/****** Object:  ForeignKey [FK_Client_SecurityQuestion_Client]    Script Date: 07/10/2017 18:54:22 ******/
+IF  EXISTS (SELECT * FROM sys.foreign_keys WHERE object_id = OBJECT_ID(N'[dbo].[FK_Client_SecurityQuestion_Client]') AND parent_object_id = OBJECT_ID(N'[dbo].[Client_SecurityQuestion]'))
+ALTER TABLE [dbo].[Client_SecurityQuestion] DROP CONSTRAINT [FK_Client_SecurityQuestion_Client]
+GO
+/****** Object:  ForeignKey [FK_Client_SecurityQuestion_SecurityQuestion]    Script Date: 07/10/2017 18:54:22 ******/
+IF  EXISTS (SELECT * FROM sys.foreign_keys WHERE object_id = OBJECT_ID(N'[dbo].[FK_Client_SecurityQuestion_SecurityQuestion]') AND parent_object_id = OBJECT_ID(N'[dbo].[Client_SecurityQuestion]'))
+ALTER TABLE [dbo].[Client_SecurityQuestion] DROP CONSTRAINT [FK_Client_SecurityQuestion_SecurityQuestion]
+GO
+/****** Object:  ForeignKey [FK_Client_Transaction_Client]    Script Date: 07/10/2017 18:54:22 ******/
+IF  EXISTS (SELECT * FROM sys.foreign_keys WHERE object_id = OBJECT_ID(N'[dbo].[FK_Client_Transaction_Client]') AND parent_object_id = OBJECT_ID(N'[dbo].[Client_Transaction]'))
+ALTER TABLE [dbo].[Client_Transaction] DROP CONSTRAINT [FK_Client_Transaction_Client]
+GO
+/****** Object:  ForeignKey [FK_Client_Transaction_Transaction]    Script Date: 07/10/2017 18:54:22 ******/
+IF  EXISTS (SELECT * FROM sys.foreign_keys WHERE object_id = OBJECT_ID(N'[dbo].[FK_Client_Transaction_Transaction]') AND parent_object_id = OBJECT_ID(N'[dbo].[Client_Transaction]'))
+ALTER TABLE [dbo].[Client_Transaction] DROP CONSTRAINT [FK_Client_Transaction_Transaction]
+GO
+/****** Object:  StoredProcedure [dbo].[sp_AccountActivity]    Script Date: 07/10/2017 18:54:28 ******/
+IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[sp_AccountActivity]') AND type in (N'P', N'PC'))
+DROP PROCEDURE [dbo].[sp_AccountActivity]
+GO
+/****** Object:  StoredProcedure [dbo].[sp_AccountCreation]    Script Date: 07/10/2017 18:54:28 ******/
+IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[sp_AccountCreation]') AND type in (N'P', N'PC'))
+DROP PROCEDURE [dbo].[sp_AccountCreation]
+GO
+/****** Object:  StoredProcedure [dbo].[sp_AddPayee]    Script Date: 07/10/2017 18:54:28 ******/
+IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[sp_AddPayee]') AND type in (N'P', N'PC'))
+DROP PROCEDURE [dbo].[sp_AddPayee]
+GO
+/****** Object:  StoredProcedure [dbo].[sp_ApprovePending]    Script Date: 07/10/2017 18:54:28 ******/
+IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[sp_ApprovePending]') AND type in (N'P', N'PC'))
+DROP PROCEDURE [dbo].[sp_ApprovePending]
+GO
+/****** Object:  StoredProcedure [dbo].[sp_ApprovePendingApplication]    Script Date: 07/10/2017 18:54:28 ******/
+IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[sp_ApprovePendingApplication]') AND type in (N'P', N'PC'))
+DROP PROCEDURE [dbo].[sp_ApprovePendingApplication]
+GO
+/****** Object:  StoredProcedure [dbo].[sp_ApprovePendingCash]    Script Date: 07/10/2017 18:54:28 ******/
+IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[sp_ApprovePendingCash]') AND type in (N'P', N'PC'))
+DROP PROCEDURE [dbo].[sp_ApprovePendingCash]
+GO
+/****** Object:  StoredProcedure [dbo].[sp_ApprovePendingTransaction]    Script Date: 07/10/2017 18:54:28 ******/
+IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[sp_ApprovePendingTransaction]') AND type in (N'P', N'PC'))
+DROP PROCEDURE [dbo].[sp_ApprovePendingTransaction]
+GO
+/****** Object:  StoredProcedure [dbo].[sp_DeletePayee]    Script Date: 07/10/2017 18:54:28 ******/
+IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[sp_DeletePayee]') AND type in (N'P', N'PC'))
+DROP PROCEDURE [dbo].[sp_DeletePayee]
+GO
+/****** Object:  StoredProcedure [dbo].[sp_Deposit_Cash]    Script Date: 07/10/2017 18:54:28 ******/
+IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[sp_Deposit_Cash]') AND type in (N'P', N'PC'))
+DROP PROCEDURE [dbo].[sp_Deposit_Cash]
+GO
+/****** Object:  StoredProcedure [dbo].[sp_Deposit_Check]    Script Date: 07/10/2017 18:54:28 ******/
+IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[sp_Deposit_Check]') AND type in (N'P', N'PC'))
+DROP PROCEDURE [dbo].[sp_Deposit_Check]
+GO
+/****** Object:  StoredProcedure [dbo].[sp_GetPayees]    Script Date: 07/10/2017 18:54:28 ******/
+IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[sp_GetPayees]') AND type in (N'P', N'PC'))
+DROP PROCEDURE [dbo].[sp_GetPayees]
+GO
+/****** Object:  StoredProcedure [dbo].[sp_GetPendingTransactions]    Script Date: 07/10/2017 18:54:28 ******/
+IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[sp_GetPendingTransactions]') AND type in (N'P', N'PC'))
+DROP PROCEDURE [dbo].[sp_GetPendingTransactions]
+GO
+/****** Object:  StoredProcedure [dbo].[sp_GetSelectedClient]    Script Date: 07/10/2017 18:54:29 ******/
+IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[sp_GetSelectedClient]') AND type in (N'P', N'PC'))
+DROP PROCEDURE [dbo].[sp_GetSelectedClient]
+GO
+/****** Object:  StoredProcedure [dbo].[sp_GetSelectedPendingApplication]    Script Date: 07/10/2017 18:54:29 ******/
+IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[sp_GetSelectedPendingApplication]') AND type in (N'P', N'PC'))
+DROP PROCEDURE [dbo].[sp_GetSelectedPendingApplication]
+GO
+/****** Object:  StoredProcedure [dbo].[sp_GetSelectedPendingApplicationAccounts]    Script Date: 07/10/2017 18:54:29 ******/
+IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[sp_GetSelectedPendingApplicationAccounts]') AND type in (N'P', N'PC'))
+DROP PROCEDURE [dbo].[sp_GetSelectedPendingApplicationAccounts]
+GO
+/****** Object:  StoredProcedure [dbo].[sp_GetSelectedPendingTransaction]    Script Date: 07/10/2017 18:54:29 ******/
+IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[sp_GetSelectedPendingTransaction]') AND type in (N'P', N'PC'))
+DROP PROCEDURE [dbo].[sp_GetSelectedPendingTransaction]
+GO
+/****** Object:  StoredProcedure [dbo].[sp_InsertClientSecurityQuestion]    Script Date: 07/10/2017 18:54:29 ******/
+IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[sp_InsertClientSecurityQuestion]') AND type in (N'P', N'PC'))
+DROP PROCEDURE [dbo].[sp_InsertClientSecurityQuestion]
+GO
+/****** Object:  StoredProcedure [dbo].[sp_LoadClientAccount]    Script Date: 07/10/2017 18:54:29 ******/
+IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[sp_LoadClientAccount]') AND type in (N'P', N'PC'))
+DROP PROCEDURE [dbo].[sp_LoadClientAccount]
+GO
+/****** Object:  StoredProcedure [dbo].[sp_LoadClientMoneyCard]    Script Date: 07/10/2017 18:54:29 ******/
+IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[sp_LoadClientMoneyCard]') AND type in (N'P', N'PC'))
+DROP PROCEDURE [dbo].[sp_LoadClientMoneyCard]
+GO
+/****** Object:  StoredProcedure [dbo].[sp_LoadPayeesForClient]    Script Date: 07/10/2017 18:54:29 ******/
+IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[sp_LoadPayeesForClient]') AND type in (N'P', N'PC'))
+DROP PROCEDURE [dbo].[sp_LoadPayeesForClient]
+GO
+/****** Object:  StoredProcedure [dbo].[sp_LoadSecurityQuestionAndAnswer]    Script Date: 07/10/2017 18:54:29 ******/
+IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[sp_LoadSecurityQuestionAndAnswer]') AND type in (N'P', N'PC'))
+DROP PROCEDURE [dbo].[sp_LoadSecurityQuestionAndAnswer]
+GO
+/****** Object:  StoredProcedure [dbo].[sp_PayBill]    Script Date: 07/10/2017 18:54:29 ******/
+IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[sp_PayBill]') AND type in (N'P', N'PC'))
+DROP PROCEDURE [dbo].[sp_PayBill]
+GO
+/****** Object:  StoredProcedure [dbo].[sp_PrintReceipt]    Script Date: 07/10/2017 18:54:29 ******/
+IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[sp_PrintReceipt]') AND type in (N'P', N'PC'))
+DROP PROCEDURE [dbo].[sp_PrintReceipt]
+GO
+/****** Object:  StoredProcedure [dbo].[sp_RechargeMoney]    Script Date: 07/10/2017 18:54:29 ******/
+IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[sp_RechargeMoney]') AND type in (N'P', N'PC'))
+DROP PROCEDURE [dbo].[sp_RechargeMoney]
+GO
+/****** Object:  StoredProcedure [dbo].[sp_Validating_SecurityAnswer]    Script Date: 07/10/2017 18:54:29 ******/
+IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[sp_Validating_SecurityAnswer]') AND type in (N'P', N'PC'))
+DROP PROCEDURE [dbo].[sp_Validating_SecurityAnswer]
+GO
+/****** Object:  StoredProcedure [dbo].[sp_Transfer_ToOther]    Script Date: 07/10/2017 18:54:29 ******/
+IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[sp_Transfer_ToOther]') AND type in (N'P', N'PC'))
+DROP PROCEDURE [dbo].[sp_Transfer_ToOther]
+GO
+/****** Object:  StoredProcedure [dbo].[sp_Transfer_within]    Script Date: 07/10/2017 18:54:29 ******/
+IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[sp_Transfer_within]') AND type in (N'P', N'PC'))
+DROP PROCEDURE [dbo].[sp_Transfer_within]
+GO
+/****** Object:  StoredProcedure [dbo].[sp_UpdateClientSecurityAnswer]    Script Date: 07/10/2017 18:54:29 ******/
+IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[sp_UpdateClientSecurityAnswer]') AND type in (N'P', N'PC'))
+DROP PROCEDURE [dbo].[sp_UpdateClientSecurityAnswer]
+GO
+/****** Object:  View [dbo].[view_clientAccounts]    Script Date: 07/10/2017 18:54:24 ******/
+IF  EXISTS (SELECT * FROM sys.views WHERE object_id = OBJECT_ID(N'[dbo].[view_clientAccounts]'))
+DROP VIEW [dbo].[view_clientAccounts]
+GO
+/****** Object:  StoredProcedure [dbo].[sp_UpdatePayee]    Script Date: 07/10/2017 18:54:29 ******/
+IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[sp_UpdatePayee]') AND type in (N'P', N'PC'))
+DROP PROCEDURE [dbo].[sp_UpdatePayee]
+GO
+/****** Object:  StoredProcedure [dbo].[sp_UpdateClient]    Script Date: 07/10/2017 18:54:29 ******/
+IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[sp_UpdateClient]') AND type in (N'P', N'PC'))
+DROP PROCEDURE [dbo].[sp_UpdateClient]
+GO
+/****** Object:  UserDefinedFunction [dbo].[tbv_GetClient]    Script Date: 07/10/2017 18:54:30 ******/
+IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[tbv_GetClient]') AND type in (N'FN', N'IF', N'TF', N'FS', N'FT'))
+DROP FUNCTION [dbo].[tbv_GetClient]
+GO
+/****** Object:  StoredProcedure [dbo].[sp_RegisterClient]    Script Date: 07/10/2017 18:54:29 ******/
+IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[sp_RegisterClient]') AND type in (N'P', N'PC'))
+DROP PROCEDURE [dbo].[sp_RegisterClient]
+GO
+/****** Object:  StoredProcedure [dbo].[sp_ShowErrorLogs]    Script Date: 07/10/2017 18:54:29 ******/
+IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[sp_ShowErrorLogs]') AND type in (N'P', N'PC'))
+DROP PROCEDURE [dbo].[sp_ShowErrorLogs]
+GO
+/****** Object:  StoredProcedure [dbo].[sp_TrackErrorLog]    Script Date: 07/10/2017 18:54:29 ******/
+IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[sp_TrackErrorLog]') AND type in (N'P', N'PC'))
+DROP PROCEDURE [dbo].[sp_TrackErrorLog]
+GO
+/****** Object:  StoredProcedure [dbo].[sp_Random_SecurityQuestion]    Script Date: 07/10/2017 18:54:29 ******/
+IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[sp_Random_SecurityQuestion]') AND type in (N'P', N'PC'))
+DROP PROCEDURE [dbo].[sp_Random_SecurityQuestion]
+GO
+/****** Object:  StoredProcedure [dbo].[sp_ManageUser]    Script Date: 07/10/2017 18:54:29 ******/
+IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[sp_ManageUser]') AND type in (N'P', N'PC'))
+DROP PROCEDURE [dbo].[sp_ManageUser]
+GO
+/****** Object:  StoredProcedure [dbo].[sp_LoadSecurityQuestion]    Script Date: 07/10/2017 18:54:29 ******/
+IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[sp_LoadSecurityQuestion]') AND type in (N'P', N'PC'))
+DROP PROCEDURE [dbo].[sp_LoadSecurityQuestion]
+GO
+/****** Object:  StoredProcedure [dbo].[sp_GetSelectedAccount]    Script Date: 07/10/2017 18:54:28 ******/
+IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[sp_GetSelectedAccount]') AND type in (N'P', N'PC'))
+DROP PROCEDURE [dbo].[sp_GetSelectedAccount]
+GO
+/****** Object:  StoredProcedure [dbo].[sp_GetPendingApplications]    Script Date: 07/10/2017 18:54:28 ******/
+IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[sp_GetPendingApplications]') AND type in (N'P', N'PC'))
+DROP PROCEDURE [dbo].[sp_GetPendingApplications]
+GO
+/****** Object:  StoredProcedure [dbo].[sp_GetPendingCounts]    Script Date: 07/10/2017 18:54:28 ******/
+IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[sp_GetPendingCounts]') AND type in (N'P', N'PC'))
+DROP PROCEDURE [dbo].[sp_GetPendingCounts]
+GO
+/****** Object:  StoredProcedure [dbo].[sp_EditPayee]    Script Date: 07/10/2017 18:54:28 ******/
+IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[sp_EditPayee]') AND type in (N'P', N'PC'))
+DROP PROCEDURE [dbo].[sp_EditPayee]
+GO
+/****** Object:  StoredProcedure [dbo].[sp_GetAllClients]    Script Date: 07/10/2017 18:54:28 ******/
+IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[sp_GetAllClients]') AND type in (N'P', N'PC'))
+DROP PROCEDURE [dbo].[sp_GetAllClients]
+GO
+/****** Object:  UserDefinedFunction [dbo].[sp_GetClient]    Script Date: 07/10/2017 18:54:30 ******/
+IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[sp_GetClient]') AND type in (N'FN', N'IF', N'TF', N'FS', N'FT'))
+DROP FUNCTION [dbo].[sp_GetClient]
+GO
+/****** Object:  StoredProcedure [dbo].[sp_AuthenticateClient]    Script Date: 07/10/2017 18:54:28 ******/
+IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[sp_AuthenticateClient]') AND type in (N'P', N'PC'))
+DROP PROCEDURE [dbo].[sp_AuthenticateClient]
+GO
+/****** Object:  StoredProcedure [dbo].[sp_AuthenticateManager]    Script Date: 07/10/2017 18:54:28 ******/
+IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[sp_AuthenticateManager]') AND type in (N'P', N'PC'))
+DROP PROCEDURE [dbo].[sp_AuthenticateManager]
+GO
+/****** Object:  StoredProcedure [dbo].[sp_BlockAccount]    Script Date: 07/10/2017 18:54:28 ******/
+IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[sp_BlockAccount]') AND type in (N'P', N'PC'))
+DROP PROCEDURE [dbo].[sp_BlockAccount]
+GO
+/****** Object:  StoredProcedure [dbo].[sp_checkuser]    Script Date: 07/10/2017 18:54:28 ******/
+IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[sp_checkuser]') AND type in (N'P', N'PC'))
+DROP PROCEDURE [dbo].[sp_checkuser]
+GO
+/****** Object:  Table [dbo].[Account_Manager]    Script Date: 07/10/2017 18:54:21 ******/
+IF  EXISTS (SELECT * FROM sys.foreign_keys WHERE object_id = OBJECT_ID(N'[dbo].[FK_Account_Manager_Account]') AND parent_object_id = OBJECT_ID(N'[dbo].[Account_Manager]'))
+ALTER TABLE [dbo].[Account_Manager] DROP CONSTRAINT [FK_Account_Manager_Account]
+GO
+IF  EXISTS (SELECT * FROM sys.foreign_keys WHERE object_id = OBJECT_ID(N'[dbo].[FK_Account_Manager_Manager]') AND parent_object_id = OBJECT_ID(N'[dbo].[Account_Manager]'))
+ALTER TABLE [dbo].[Account_Manager] DROP CONSTRAINT [FK_Account_Manager_Manager]
+GO
+IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[Account_Manager]') AND type in (N'U'))
+DROP TABLE [dbo].[Account_Manager]
+GO
+/****** Object:  Table [dbo].[Account_Transaction]    Script Date: 07/10/2017 18:54:21 ******/
+IF  EXISTS (SELECT * FROM sys.foreign_keys WHERE object_id = OBJECT_ID(N'[dbo].[FK_Account_Transaction_Account]') AND parent_object_id = OBJECT_ID(N'[dbo].[Account_Transaction]'))
+ALTER TABLE [dbo].[Account_Transaction] DROP CONSTRAINT [FK_Account_Transaction_Account]
+GO
+IF  EXISTS (SELECT * FROM sys.foreign_keys WHERE object_id = OBJECT_ID(N'[dbo].[FK_Account_Transaction_Transaction]') AND parent_object_id = OBJECT_ID(N'[dbo].[Account_Transaction]'))
+ALTER TABLE [dbo].[Account_Transaction] DROP CONSTRAINT [FK_Account_Transaction_Transaction]
+GO
+IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[Account_Transaction]') AND type in (N'U'))
+DROP TABLE [dbo].[Account_Transaction]
+GO
+/****** Object:  Table [dbo].[Client_Account]    Script Date: 07/10/2017 18:54:21 ******/
+IF  EXISTS (SELECT * FROM sys.foreign_keys WHERE object_id = OBJECT_ID(N'[dbo].[FK_Client_Account_Account]') AND parent_object_id = OBJECT_ID(N'[dbo].[Client_Account]'))
+ALTER TABLE [dbo].[Client_Account] DROP CONSTRAINT [FK_Client_Account_Account]
+GO
+IF  EXISTS (SELECT * FROM sys.foreign_keys WHERE object_id = OBJECT_ID(N'[dbo].[FK_Client_Account_Client]') AND parent_object_id = OBJECT_ID(N'[dbo].[Client_Account]'))
+ALTER TABLE [dbo].[Client_Account] DROP CONSTRAINT [FK_Client_Account_Client]
+GO
+IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[Client_Account]') AND type in (N'U'))
+DROP TABLE [dbo].[Client_Account]
+GO
+/****** Object:  Table [dbo].[Client_Moneycard]    Script Date: 07/10/2017 18:54:22 ******/
+IF  EXISTS (SELECT * FROM sys.foreign_keys WHERE object_id = OBJECT_ID(N'[dbo].[FK_Client_Moneycard_Client]') AND parent_object_id = OBJECT_ID(N'[dbo].[Client_Moneycard]'))
+ALTER TABLE [dbo].[Client_Moneycard] DROP CONSTRAINT [FK_Client_Moneycard_Client]
+GO
+IF  EXISTS (SELECT * FROM sys.foreign_keys WHERE object_id = OBJECT_ID(N'[dbo].[FK_Client_Moneycard_Moneycard]') AND parent_object_id = OBJECT_ID(N'[dbo].[Client_Moneycard]'))
+ALTER TABLE [dbo].[Client_Moneycard] DROP CONSTRAINT [FK_Client_Moneycard_Moneycard]
+GO
+IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[Client_Moneycard]') AND type in (N'U'))
+DROP TABLE [dbo].[Client_Moneycard]
+GO
+/****** Object:  Table [dbo].[Client_Payee]    Script Date: 07/10/2017 18:54:22 ******/
+IF  EXISTS (SELECT * FROM sys.foreign_keys WHERE object_id = OBJECT_ID(N'[dbo].[FK_Client_Payee_Client]') AND parent_object_id = OBJECT_ID(N'[dbo].[Client_Payee]'))
+ALTER TABLE [dbo].[Client_Payee] DROP CONSTRAINT [FK_Client_Payee_Client]
+GO
+IF  EXISTS (SELECT * FROM sys.foreign_keys WHERE object_id = OBJECT_ID(N'[dbo].[FK_Client_Payee_Payee]') AND parent_object_id = OBJECT_ID(N'[dbo].[Client_Payee]'))
+ALTER TABLE [dbo].[Client_Payee] DROP CONSTRAINT [FK_Client_Payee_Payee]
+GO
+IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[Client_Payee]') AND type in (N'U'))
+DROP TABLE [dbo].[Client_Payee]
+GO
+/****** Object:  Table [dbo].[Client_SecurityQuestion]    Script Date: 07/10/2017 18:54:22 ******/
+IF  EXISTS (SELECT * FROM sys.foreign_keys WHERE object_id = OBJECT_ID(N'[dbo].[FK_Client_SecurityQuestion_Client]') AND parent_object_id = OBJECT_ID(N'[dbo].[Client_SecurityQuestion]'))
+ALTER TABLE [dbo].[Client_SecurityQuestion] DROP CONSTRAINT [FK_Client_SecurityQuestion_Client]
+GO
+IF  EXISTS (SELECT * FROM sys.foreign_keys WHERE object_id = OBJECT_ID(N'[dbo].[FK_Client_SecurityQuestion_SecurityQuestion]') AND parent_object_id = OBJECT_ID(N'[dbo].[Client_SecurityQuestion]'))
+ALTER TABLE [dbo].[Client_SecurityQuestion] DROP CONSTRAINT [FK_Client_SecurityQuestion_SecurityQuestion]
+GO
+IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[Client_SecurityQuestion]') AND type in (N'U'))
+DROP TABLE [dbo].[Client_SecurityQuestion]
+GO
+/****** Object:  Table [dbo].[Client_Transaction]    Script Date: 07/10/2017 18:54:22 ******/
+IF  EXISTS (SELECT * FROM sys.foreign_keys WHERE object_id = OBJECT_ID(N'[dbo].[FK_Client_Transaction_Client]') AND parent_object_id = OBJECT_ID(N'[dbo].[Client_Transaction]'))
+ALTER TABLE [dbo].[Client_Transaction] DROP CONSTRAINT [FK_Client_Transaction_Client]
+GO
+IF  EXISTS (SELECT * FROM sys.foreign_keys WHERE object_id = OBJECT_ID(N'[dbo].[FK_Client_Transaction_Transaction]') AND parent_object_id = OBJECT_ID(N'[dbo].[Client_Transaction]'))
+ALTER TABLE [dbo].[Client_Transaction] DROP CONSTRAINT [FK_Client_Transaction_Transaction]
+GO
+IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[Client_Transaction]') AND type in (N'U'))
+DROP TABLE [dbo].[Client_Transaction]
+GO
+/****** Object:  Table [dbo].[Error_Log]    Script Date: 07/10/2017 18:54:22 ******/
+IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[Error_Log]') AND type in (N'U'))
+DROP TABLE [dbo].[Error_Log]
+GO
+/****** Object:  Table [dbo].[Manager]    Script Date: 07/10/2017 18:54:22 ******/
+IF  EXISTS (SELECT * FROM dbo.sysobjects WHERE id = OBJECT_ID(N'[DF_Manager_StartDate]') AND type = 'D')
+BEGIN
+ALTER TABLE [dbo].[Manager] DROP CONSTRAINT [DF_Manager_StartDate]
+END
+GO
+IF  EXISTS (SELECT * FROM dbo.sysobjects WHERE id = OBJECT_ID(N'[DF_Manager_Active]') AND type = 'D')
+BEGIN
+ALTER TABLE [dbo].[Manager] DROP CONSTRAINT [DF_Manager_Active]
+END
+GO
+IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[Manager]') AND type in (N'U'))
+DROP TABLE [dbo].[Manager]
+GO
+/****** Object:  Table [dbo].[Message_Log]    Script Date: 07/10/2017 18:54:22 ******/
+IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[Message_Log]') AND type in (N'U'))
+DROP TABLE [dbo].[Message_Log]
+GO
+/****** Object:  Table [dbo].[Moneycard]    Script Date: 07/10/2017 18:54:23 ******/
+IF  EXISTS (SELECT * FROM dbo.sysobjects WHERE id = OBJECT_ID(N'[DF_Moneycard_DateIssued]') AND type = 'D')
+BEGIN
+ALTER TABLE [dbo].[Moneycard] DROP CONSTRAINT [DF_Moneycard_DateIssued]
+END
+GO
+IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[Moneycard]') AND type in (N'U'))
+DROP TABLE [dbo].[Moneycard]
+GO
+/****** Object:  Table [dbo].[Payee]    Script Date: 07/10/2017 18:54:23 ******/
+IF  EXISTS (SELECT * FROM dbo.sysobjects WHERE id = OBJECT_ID(N'[DF_Payee_DateAdded]') AND type = 'D')
+BEGIN
+ALTER TABLE [dbo].[Payee] DROP CONSTRAINT [DF_Payee_DateAdded]
+END
+GO
+IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[Payee]') AND type in (N'U'))
+DROP TABLE [dbo].[Payee]
+GO
+/****** Object:  Table [dbo].[SecurityQuestion]    Script Date: 07/10/2017 18:54:23 ******/
+IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[SecurityQuestion]') AND type in (N'U'))
+DROP TABLE [dbo].[SecurityQuestion]
+GO
+/****** Object:  Table [dbo].[Client]    Script Date: 07/10/2017 18:54:21 ******/
+IF  EXISTS (SELECT * FROM dbo.sysobjects WHERE id = OBJECT_ID(N'[DF_Client_Active]') AND type = 'D')
+BEGIN
+ALTER TABLE [dbo].[Client] DROP CONSTRAINT [DF_Client_Active]
+END
+GO
+IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[Client]') AND type in (N'U'))
+DROP TABLE [dbo].[Client]
+GO
+/****** Object:  Table [dbo].[Account]    Script Date: 07/10/2017 18:54:21 ******/
+IF  EXISTS (SELECT * FROM dbo.sysobjects WHERE id = OBJECT_ID(N'[DF_Account_DateCreated]') AND type = 'D')
+BEGIN
+ALTER TABLE [dbo].[Account] DROP CONSTRAINT [DF_Account_DateCreated]
+END
+GO
+IF  EXISTS (SELECT * FROM dbo.sysobjects WHERE id = OBJECT_ID(N'[DF_Account_TotalBalance]') AND type = 'D')
+BEGIN
+ALTER TABLE [dbo].[Account] DROP CONSTRAINT [DF_Account_TotalBalance]
+END
+GO
+IF  EXISTS (SELECT * FROM dbo.sysobjects WHERE id = OBJECT_ID(N'[DF_Account_AvailableBalance]') AND type = 'D')
+BEGIN
+ALTER TABLE [dbo].[Account] DROP CONSTRAINT [DF_Account_AvailableBalance]
+END
+GO
+IF  EXISTS (SELECT * FROM dbo.sysobjects WHERE id = OBJECT_ID(N'[DF_Account_Fee]') AND type = 'D')
+BEGIN
+ALTER TABLE [dbo].[Account] DROP CONSTRAINT [DF_Account_Fee]
+END
+GO
+IF  EXISTS (SELECT * FROM dbo.sysobjects WHERE id = OBJECT_ID(N'[DF_Account_InterestRate]') AND type = 'D')
+BEGIN
+ALTER TABLE [dbo].[Account] DROP CONSTRAINT [DF_Account_InterestRate]
+END
+GO
+IF  EXISTS (SELECT * FROM dbo.sysobjects WHERE id = OBJECT_ID(N'[DF_Account_LastAccessed]') AND type = 'D')
+BEGIN
+ALTER TABLE [dbo].[Account] DROP CONSTRAINT [DF_Account_LastAccessed]
+END
+GO
+IF  EXISTS (SELECT * FROM dbo.sysobjects WHERE id = OBJECT_ID(N'[DF_Account_Active]') AND type = 'D')
+BEGIN
+ALTER TABLE [dbo].[Account] DROP CONSTRAINT [DF_Account_Active]
+END
+GO
+IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[Account]') AND type in (N'U'))
+DROP TABLE [dbo].[Account]
+GO
+/****** Object:  UserDefinedFunction [dbo].[test_Date]    Script Date: 07/10/2017 18:54:30 ******/
+IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[test_Date]') AND type in (N'FN', N'IF', N'TF', N'FS', N'FT'))
+DROP FUNCTION [dbo].[test_Date]
+GO
+/****** Object:  Table [dbo].[Transaction]    Script Date: 07/10/2017 18:54:23 ******/
+IF  EXISTS (SELECT * FROM dbo.sysobjects WHERE id = OBJECT_ID(N'[DF_Transaction_DatePerformed]') AND type = 'D')
+BEGIN
+ALTER TABLE [dbo].[Transaction] DROP CONSTRAINT [DF_Transaction_DatePerformed]
+END
+GO
+IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[Transaction]') AND type in (N'U'))
+DROP TABLE [dbo].[Transaction]
+GO
+/****** Object:  Table [dbo].[Transaction]    Script Date: 07/10/2017 18:54:23 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+SET ANSI_PADDING ON
+GO
+IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[Transaction]') AND type in (N'U'))
+BEGIN
+CREATE TABLE [dbo].[Transaction](
+	[ID] [bigint] IDENTITY(1,1) NOT NULL,
+	[Type] [varchar](50) NOT NULL,
+	[TransactionType] [bit] NULL,
+	[TransactionFee] [money] NOT NULL,
+	[Amount] [money] NOT NULL,
+	[TransactionDate] [datetime] NOT NULL CONSTRAINT [DF_Transaction_DatePerformed]  DEFAULT (getdate()),
+	[ApprovedDate] [datetime] NULL,
+	[TransactionDescription] [varchar](max) NULL,
+	[ImagePath] [varchar](50) NULL,
+	[ManagerNotes] [varchar](max) NULL,
+	[Status] [varchar](50) NOT NULL,
+ CONSTRAINT [PK_Transaction] PRIMARY KEY CLUSTERED 
+(
+	[ID] ASC
+)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON) ON [PRIMARY]
+) ON [PRIMARY]
+END
+GO
+SET ANSI_PADDING OFF
+GO
+SET IDENTITY_INSERT [dbo].[Transaction] ON
+INSERT [dbo].[Transaction] ([ID], [Type], [TransactionType], [TransactionFee], [Amount], [TransactionDate], [ApprovedDate], [TransactionDescription], [ImagePath], [ManagerNotes], [Status]) VALUES (123, N'Deposit', 1, 0.0000, 500.0000, CAST(0x0000A0330127437C AS DateTime), NULL, N'413267 Please accept my deposit through check.', N'ClassDiagram.png', N'Approved
+', N'Approved')
+INSERT [dbo].[Transaction] ([ID], [Type], [TransactionType], [TransactionFee], [Amount], [TransactionDate], [ApprovedDate], [TransactionDescription], [ImagePath], [ManagerNotes], [Status]) VALUES (124, N'Deposit', 1, 0.0000, 500.0000, CAST(0x0000A0330128CC53 AS DateTime), NULL, N'Please accept my deposit by cash.', NULL, N'Approved by cash.', N'Declined')
+INSERT [dbo].[Transaction] ([ID], [Type], [TransactionType], [TransactionFee], [Amount], [TransactionDate], [ApprovedDate], [TransactionDescription], [ImagePath], [ManagerNotes], [Status]) VALUES (125, N'Deposit', 1, 0.0000, 500.0000, CAST(0x0000A033014B215F AS DateTime), NULL, N'412387 please deposit 500 to my account', N'ClassDiagram.png', N'Disapproved.', N'Declined')
+INSERT [dbo].[Transaction] ([ID], [Type], [TransactionType], [TransactionFee], [Amount], [TransactionDate], [ApprovedDate], [TransactionDescription], [ImagePath], [ManagerNotes], [Status]) VALUES (126, N'Deposit', 1, 0.0000, 500.0000, CAST(0x0000A033014EDE30 AS DateTime), NULL, N'please deposit 500 to my account - cash', NULL, N'approved. ', N'Approved')
+INSERT [dbo].[Transaction] ([ID], [Type], [TransactionType], [TransactionFee], [Amount], [TransactionDate], [ApprovedDate], [TransactionDescription], [ImagePath], [ManagerNotes], [Status]) VALUES (127, N'Withdraw', 0, 0.0000, 49.5000, CAST(0x0000A033014FA624 AS DateTime), CAST(0x0000A033014FA624 AS DateTime), NULL, NULL, NULL, N'Approved')
+INSERT [dbo].[Transaction] ([ID], [Type], [TransactionType], [TransactionFee], [Amount], [TransactionDate], [ApprovedDate], [TransactionDescription], [ImagePath], [ManagerNotes], [Status]) VALUES (128, N'Withdraw', 0, 0.0000, 50.0000, CAST(0x0000A0330151EF6E AS DateTime), CAST(0x0000A0330151EF6E AS DateTime), NULL, NULL, NULL, N'Approved')
+INSERT [dbo].[Transaction] ([ID], [Type], [TransactionType], [TransactionFee], [Amount], [TransactionDate], [ApprovedDate], [TransactionDescription], [ImagePath], [ManagerNotes], [Status]) VALUES (129, N'Transfer', 0, 0.0000, 0.5000, CAST(0x0000A0330152295E AS DateTime), CAST(0x0000A0330152295E AS DateTime), NULL, NULL, NULL, N'Approved')
+INSERT [dbo].[Transaction] ([ID], [Type], [TransactionType], [TransactionFee], [Amount], [TransactionDate], [ApprovedDate], [TransactionDescription], [ImagePath], [ManagerNotes], [Status]) VALUES (130, N'Transfer', 0, 0.0000, 0.2500, CAST(0x0000A033015518E1 AS DateTime), CAST(0x0000A033015518E1 AS DateTime), NULL, NULL, NULL, N'Approved')
+INSERT [dbo].[Transaction] ([ID], [Type], [TransactionType], [TransactionFee], [Amount], [TransactionDate], [ApprovedDate], [TransactionDescription], [ImagePath], [ManagerNotes], [Status]) VALUES (131, N'Pay Bill', 0, 0.0000, 50.0000, CAST(0x0000A033015C7C7B AS DateTime), CAST(0x0000A033015C7C7B AS DateTime), NULL, NULL, NULL, N'Approved')
+INSERT [dbo].[Transaction] ([ID], [Type], [TransactionType], [TransactionFee], [Amount], [TransactionDate], [ApprovedDate], [TransactionDescription], [ImagePath], [ManagerNotes], [Status]) VALUES (132, N'Deposit', 1, 0.0000, 100.1000, CAST(0x0000A03400E32568 AS DateTime), NULL, N'Please deposit the amount to my account, which I deposited to branch yesterday.', NULL, NULL, N'Pending')
+INSERT [dbo].[Transaction] ([ID], [Type], [TransactionType], [TransactionFee], [Amount], [TransactionDate], [ApprovedDate], [TransactionDescription], [ImagePath], [ManagerNotes], [Status]) VALUES (133, N'Deposit', 1, 0.0000, 50.5500, CAST(0x0000A03400E6A915 AS DateTime), NULL, N'test', NULL, NULL, N'Pending')
+INSERT [dbo].[Transaction] ([ID], [Type], [TransactionType], [TransactionFee], [Amount], [TransactionDate], [ApprovedDate], [TransactionDescription], [ImagePath], [ManagerNotes], [Status]) VALUES (134, N'Deposit', 1, 0.0000, 55.5500, CAST(0x0000A03400E6DAA5 AS DateTime), NULL, N'test', NULL, N'Transaction Declined with some reasons.', N'Declined')
+INSERT [dbo].[Transaction] ([ID], [Type], [TransactionType], [TransactionFee], [Amount], [TransactionDate], [ApprovedDate], [TransactionDescription], [ImagePath], [ManagerNotes], [Status]) VALUES (135, N'Deposit', 1, 0.0000, 69.3200, CAST(0x0000A03400E6E973 AS DateTime), NULL, N'test', NULL, N'', N'Declined')
+INSERT [dbo].[Transaction] ([ID], [Type], [TransactionType], [TransactionFee], [Amount], [TransactionDate], [ApprovedDate], [TransactionDescription], [ImagePath], [ManagerNotes], [Status]) VALUES (136, N'Deposit', 1, 0.0000, 50.5000, CAST(0x0000A03400F41265 AS DateTime), NULL, N'Vd5332 Please deposit the check.', N'fb-revealpage.jpg', N'approved', N'Approved')
+INSERT [dbo].[Transaction] ([ID], [Type], [TransactionType], [TransactionFee], [Amount], [TransactionDate], [ApprovedDate], [TransactionDescription], [ImagePath], [ManagerNotes], [Status]) VALUES (137, N'Deposit', 1, 0.0000, 14.5100, CAST(0x0000A034010A2FA5 AS DateTime), NULL, N'dfj233f test', N'A.R.R. Signature.jpg', N'approved', N'Approved')
+INSERT [dbo].[Transaction] ([ID], [Type], [TransactionType], [TransactionFee], [Amount], [TransactionDate], [ApprovedDate], [TransactionDescription], [ImagePath], [ManagerNotes], [Status]) VALUES (138, N'Deposit', 1, 0.0000, 231.5200, CAST(0x0000A034010C59F7 AS DateTime), NULL, N'sdfsda34 test', N'A.R.R. Signature.jpg', N'approved', N'Approved')
+INSERT [dbo].[Transaction] ([ID], [Type], [TransactionType], [TransactionFee], [Amount], [TransactionDate], [ApprovedDate], [TransactionDescription], [ImagePath], [ManagerNotes], [Status]) VALUES (139, N'Deposit', 1, 0.0000, 56.1700, CAST(0x0000A034010D1AC9 AS DateTime), NULL, N'fgde43 tedfsdf', N'A.R.R. Signature.jpg', N'hgdf', N'Approved')
+INSERT [dbo].[Transaction] ([ID], [Type], [TransactionType], [TransactionFee], [Amount], [TransactionDate], [ApprovedDate], [TransactionDescription], [ImagePath], [ManagerNotes], [Status]) VALUES (140, N'Deposit', 1, 0.0000, 77.9100, CAST(0x0000A034010D38E9 AS DateTime), NULL, N't4324 trersdwf', N'diagram (2).png', N'geg', N'Approved')
+INSERT [dbo].[Transaction] ([ID], [Type], [TransactionType], [TransactionFee], [Amount], [TransactionDate], [ApprovedDate], [TransactionDescription], [ImagePath], [ManagerNotes], [Status]) VALUES (141, N'Deposit', 1, 0.0000, 99.9900, CAST(0x0000A034010DBCD4 AS DateTime), NULL, N'efdf', NULL, N'vc', N'Approved')
+INSERT [dbo].[Transaction] ([ID], [Type], [TransactionType], [TransactionFee], [Amount], [TransactionDate], [ApprovedDate], [TransactionDescription], [ImagePath], [ManagerNotes], [Status]) VALUES (142, N'Pay Bill', 0, 0.0000, 56.4400, CAST(0x0000A0340151F173 AS DateTime), CAST(0x0000A0340151F173 AS DateTime), NULL, NULL, NULL, N'Approved')
+INSERT [dbo].[Transaction] ([ID], [Type], [TransactionType], [TransactionFee], [Amount], [TransactionDate], [ApprovedDate], [TransactionDescription], [ImagePath], [ManagerNotes], [Status]) VALUES (143, N'Deposit', 1, 0.0000, 50.0000, CAST(0x0000A7920171344D AS DateTime), NULL, N'Deposit Test', NULL, N'Approved', N'Approved')
+INSERT [dbo].[Transaction] ([ID], [Type], [TransactionType], [TransactionFee], [Amount], [TransactionDate], [ApprovedDate], [TransactionDescription], [ImagePath], [ManagerNotes], [Status]) VALUES (144, N'Deposit', 1, 0.0000, 5000.0000, CAST(0x0000A7920171494C AS DateTime), NULL, N'Deposit Test', NULL, N'Approved', N'Approved')
+INSERT [dbo].[Transaction] ([ID], [Type], [TransactionType], [TransactionFee], [Amount], [TransactionDate], [ApprovedDate], [TransactionDescription], [ImagePath], [ManagerNotes], [Status]) VALUES (145, N'Withdraw', 0, 0.0000, 50.0000, CAST(0x0000A79E012C7CBA AS DateTime), CAST(0x0000A79E012C7CBA AS DateTime), NULL, NULL, NULL, N'Approved')
+INSERT [dbo].[Transaction] ([ID], [Type], [TransactionType], [TransactionFee], [Amount], [TransactionDate], [ApprovedDate], [TransactionDescription], [ImagePath], [ManagerNotes], [Status]) VALUES (146, N'Withdraw', 0, 0.0000, 51.0000, CAST(0x0000A79E013D1556 AS DateTime), CAST(0x0000A79E013D1556 AS DateTime), NULL, NULL, NULL, N'Approved')
+INSERT [dbo].[Transaction] ([ID], [Type], [TransactionType], [TransactionFee], [Amount], [TransactionDate], [ApprovedDate], [TransactionDescription], [ImagePath], [ManagerNotes], [Status]) VALUES (147, N'Deposit', 1, 0.0000, 1000.0000, CAST(0x0000A79E013E69B2 AS DateTime), NULL, N'Please approve my transaction', NULL, N'I am approving this transaction', N'Approved')
+INSERT [dbo].[Transaction] ([ID], [Type], [TransactionType], [TransactionFee], [Amount], [TransactionDate], [ApprovedDate], [TransactionDescription], [ImagePath], [ManagerNotes], [Status]) VALUES (148, N'Transfer', 0, 0.0000, 50.0000, CAST(0x0000A79E014146AD AS DateTime), CAST(0x0000A79E014146AD AS DateTime), NULL, NULL, NULL, N'Approved')
+SET IDENTITY_INSERT [dbo].[Transaction] OFF
+/****** Object:  UserDefinedFunction [dbo].[test_Date]    Script Date: 07/10/2017 18:54:30 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[test_Date]') AND type in (N'FN', N'IF', N'TF', N'FS', N'FT'))
+BEGIN
+execute dbo.sp_executesql @statement = N'-- =============================================
+-- Author:		<Author,,Name>
+-- Create date: <Create Date, ,>
+-- Description:	<Description, ,>
+-- =============================================
+CREATE FUNCTION [dbo].[test_Date] 
+(
+	-- Add the parameters for the function here
+	@iType as INT
+)
+RETURNS VARCHAR(MAX)
+AS
+BEGIN
+declare @returnvalue as varchar(max)
+
+IF (@iType > 2)
+BEGIN
+	SET @returnvalue = ''It is more than one''
+END
+ELSE
+BEGIN
+	SET @returnvalue = ''Either one or less than one''
+END
+	
+	return @returnvalue
+END
+
+
+
+' 
+END
+GO
+/****** Object:  Table [dbo].[Account]    Script Date: 07/10/2017 18:54:21 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+SET ANSI_PADDING ON
+GO
+IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[Account]') AND type in (N'U'))
+BEGIN
+CREATE TABLE [dbo].[Account](
+	[ID] [bigint] IDENTITY(1,1) NOT NULL,
+	[AccountNumber] [bigint] NULL,
+	[DateCreated] [datetime] NOT NULL CONSTRAINT [DF_Account_DateCreated]  DEFAULT (getdate()),
+	[Type] [varchar](50) NOT NULL,
+	[TotalBalance] [money] NOT NULL CONSTRAINT [DF_Account_TotalBalance]  DEFAULT ((0)),
+	[AvailableBalance] [money] NOT NULL CONSTRAINT [DF_Account_AvailableBalance]  DEFAULT ((0)),
+	[Fee] [money] NOT NULL CONSTRAINT [DF_Account_Fee]  DEFAULT ((0)),
+	[InterestRate] [decimal](8, 2) NOT NULL CONSTRAINT [DF_Account_InterestRate]  DEFAULT ((0)),
+	[LastAccessed] [datetime] NULL CONSTRAINT [DF_Account_LastAccessed]  DEFAULT (getdate()),
+	[Active] [bit] NOT NULL CONSTRAINT [DF_Account_Active]  DEFAULT ((1)),
+ CONSTRAINT [PK_Account] PRIMARY KEY CLUSTERED 
+(
+	[ID] ASC
+)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON) ON [PRIMARY]
+) ON [PRIMARY]
+END
+GO
+SET ANSI_PADDING OFF
+GO
+SET IDENTITY_INSERT [dbo].[Account] ON
+INSERT [dbo].[Account] ([ID], [AccountNumber], [DateCreated], [Type], [TotalBalance], [AvailableBalance], [Fee], [InterestRate], [LastAccessed], [Active]) VALUES (35, 8898334455667788, CAST(0x0000A033014A0C59 AS DateTime), N'Checking', 0.0000, 350.0000, 0.0000, CAST(0.00 AS Decimal(8, 2)), NULL, 1)
+INSERT [dbo].[Account] ([ID], [AccountNumber], [DateCreated], [Type], [TotalBalance], [AvailableBalance], [Fee], [InterestRate], [LastAccessed], [Active]) VALUES (36, 8898334455667789, CAST(0x0000A033014A0C5A AS DateTime), N'Savings', 0.0000, 0.2500, 0.0000, CAST(0.00 AS Decimal(8, 2)), NULL, 1)
+INSERT [dbo].[Account] ([ID], [AccountNumber], [DateCreated], [Type], [TotalBalance], [AvailableBalance], [Fee], [InterestRate], [LastAccessed], [Active]) VALUES (37, 8898334455667790, CAST(0x0000A033014CA1F4 AS DateTime), N'Checking', 0.0000, 0.2500, 0.0000, CAST(0.00 AS Decimal(8, 2)), NULL, 1)
+INSERT [dbo].[Account] ([ID], [AccountNumber], [DateCreated], [Type], [TotalBalance], [AvailableBalance], [Fee], [InterestRate], [LastAccessed], [Active]) VALUES (38, 8898334455667791, CAST(0x0000A03400D6A2BD AS DateTime), N'Junior', 0.0000, 240.0900, 0.0000, CAST(0.00 AS Decimal(8, 2)), NULL, 1)
+INSERT [dbo].[Account] ([ID], [AccountNumber], [DateCreated], [Type], [TotalBalance], [AvailableBalance], [Fee], [InterestRate], [LastAccessed], [Active]) VALUES (39, 8898334455667792, CAST(0x0000A03400D6A2BE AS DateTime), N'Checking', 0.0000, 234.0700, 0.0000, CAST(0.00 AS Decimal(8, 2)), NULL, 1)
+INSERT [dbo].[Account] ([ID], [AccountNumber], [DateCreated], [Type], [TotalBalance], [AvailableBalance], [Fee], [InterestRate], [LastAccessed], [Active]) VALUES (40, 8898334455667793, CAST(0x0000A03400D6A2BF AS DateTime), N'Savings', 0.0000, 0.0000, 0.0000, CAST(0.00 AS Decimal(8, 2)), NULL, 1)
+INSERT [dbo].[Account] ([ID], [AccountNumber], [DateCreated], [Type], [TotalBalance], [AvailableBalance], [Fee], [InterestRate], [LastAccessed], [Active]) VALUES (41, 8898334455667794, CAST(0x0000A791016FE3D4 AS DateTime), N'Checking', 0.0000, 5849.0000, 0.0000, CAST(0.00 AS Decimal(8, 2)), NULL, 1)
+INSERT [dbo].[Account] ([ID], [AccountNumber], [DateCreated], [Type], [TotalBalance], [AvailableBalance], [Fee], [InterestRate], [LastAccessed], [Active]) VALUES (42, 8898334455667795, CAST(0x0000A791016FE422 AS DateTime), N'Savings', 0.0000, 100.0000, 0.0000, CAST(0.00 AS Decimal(8, 2)), NULL, 1)
+SET IDENTITY_INSERT [dbo].[Account] OFF
+/****** Object:  Table [dbo].[Client]    Script Date: 07/10/2017 18:54:21 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+SET ANSI_PADDING ON
+GO
+IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[Client]') AND type in (N'U'))
+BEGIN
+CREATE TABLE [dbo].[Client](
+	[ID] [bigint] IDENTITY(1,1) NOT NULL,
+	[ClientCardNumber] [varchar](16) NULL,
+	[ClientPassword] [varchar](50) NOT NULL,
+	[FirstName] [varchar](50) NOT NULL,
+	[LastName] [varchar](50) NOT NULL,
+	[Sex] [varchar](10) NOT NULL,
+	[Email] [varchar](50) NOT NULL,
+	[DateOfBirth] [date] NOT NULL,
+	[Contactnumber] [varchar](50) NULL,
+	[Address] [varchar](100) NOT NULL,
+	[City] [varchar](50) NOT NULL,
+	[PostalCode] [varchar](10) NOT NULL,
+	[Province] [varchar](50) NOT NULL,
+	[SIN] [bigint] NULL,
+	[Active] [varchar](50) NOT NULL CONSTRAINT [DF_Client_Active]  DEFAULT ((1)),
+ CONSTRAINT [PK_Client] PRIMARY KEY CLUSTERED 
+(
+	[ID] ASC
+)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON) ON [PRIMARY]
+) ON [PRIMARY]
+END
+GO
+SET ANSI_PADDING OFF
+GO
+SET IDENTITY_INSERT [dbo].[Client] ON
+INSERT [dbo].[Client] ([ID], [ClientCardNumber], [ClientPassword], [FirstName], [LastName], [Sex], [Email], [DateOfBirth], [Contactnumber], [Address], [City], [PostalCode], [Province], [SIN], [Active]) VALUES (57, N'4521334455667788', N'JPAxONEx21g=', N'Abhinav', N'Shah', N'Male', N'shah.abhinav@gmail.com', CAST(0x7B140B00 AS Date), N'5148247341', N'hkjhjkhkj', N'hjkh', N'H3H2J7', N'Quebec', 985412976, N'Declined')
+INSERT [dbo].[Client] ([ID], [ClientCardNumber], [ClientPassword], [FirstName], [LastName], [Sex], [Email], [DateOfBirth], [Contactnumber], [Address], [City], [PostalCode], [Province], [SIN], [Active]) VALUES (58, N'4521334455667789', N'5DAlg3LOt78=', N'Manthan', N'Makwana', N'Male', N'shah.abhinav@gmail.com', CAST(0x04110B00 AS Date), N'5147264694', N'montreal', N'qq', N'h3h2j7', N'Quebec', 984327654, N'Approved')
+INSERT [dbo].[Client] ([ID], [ClientCardNumber], [ClientPassword], [FirstName], [LastName], [Sex], [Email], [DateOfBirth], [Contactnumber], [Address], [City], [PostalCode], [Province], [SIN], [Active]) VALUES (59, N'4521334455667790', N'5DAlg3LOt78=', N'Manthankumar', N'Makwana', N'Male', N'manthan.makwana@gmail.com', CAST(0xC0160B00 AS Date), N'5147264694', N'testZXzaxsaxsa,
+dfgv,
+fght', N'Vancouver', N'423423', N'British Columbia', NULL, N'Approved')
+INSERT [dbo].[Client] ([ID], [ClientCardNumber], [ClientPassword], [FirstName], [LastName], [Sex], [Email], [DateOfBirth], [Contactnumber], [Address], [City], [PostalCode], [Province], [SIN], [Active]) VALUES (60, N'4521334455667791', N'5DAlg3LOt78=', N'Manthan', N'Makwana', N'Male', N'manthan.makwana@live.com', CAST(0x8F120B00 AS Date), N'5147264694', N'2171 Boulevard Edouard Montpetit Apt#303', N'Montreal', N'H3T1J3', N'Quebec', NULL, N'Approved')
+SET IDENTITY_INSERT [dbo].[Client] OFF
+/****** Object:  Table [dbo].[SecurityQuestion]    Script Date: 07/10/2017 18:54:23 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+SET ANSI_PADDING ON
+GO
+IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[SecurityQuestion]') AND type in (N'U'))
+BEGIN
+CREATE TABLE [dbo].[SecurityQuestion](
+	[ID] [bigint] IDENTITY(1,1) NOT NULL,
+	[Question] [varchar](500) NOT NULL,
+ CONSTRAINT [PK_SecurityQuestion] PRIMARY KEY CLUSTERED 
+(
+	[ID] ASC
+)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON) ON [PRIMARY]
+) ON [PRIMARY]
+END
+GO
+SET ANSI_PADDING OFF
+GO
+SET IDENTITY_INSERT [dbo].[SecurityQuestion] ON
+INSERT [dbo].[SecurityQuestion] ([ID], [Question]) VALUES (1, N'What is your favourite hobby?')
+INSERT [dbo].[SecurityQuestion] ([ID], [Question]) VALUES (2, N'Which is your favourite TV show?')
+INSERT [dbo].[SecurityQuestion] ([ID], [Question]) VALUES (3, N'Which is your favourite destination?')
+INSERT [dbo].[SecurityQuestion] ([ID], [Question]) VALUES (4, N'Which is your birth place?')
+INSERT [dbo].[SecurityQuestion] ([ID], [Question]) VALUES (5, N'What is your favourite sport?')
+SET IDENTITY_INSERT [dbo].[SecurityQuestion] OFF
+/****** Object:  Table [dbo].[Payee]    Script Date: 07/10/2017 18:54:23 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+SET ANSI_PADDING ON
+GO
+IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[Payee]') AND type in (N'U'))
+BEGIN
+CREATE TABLE [dbo].[Payee](
+	[ID] [bigint] IDENTITY(1,1) NOT NULL,
+	[PayeeNamee] [varchar](50) NOT NULL,
+	[PayeeNickname] [varchar](50) NULL,
+	[PayeeIdentifier] [varchar](50) NOT NULL,
+	[DateAdded] [datetime] NOT NULL CONSTRAINT [DF_Payee_DateAdded]  DEFAULT (getdate()),
+ CONSTRAINT [PK_Payee] PRIMARY KEY CLUSTERED 
+(
+	[ID] ASC
+)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON) ON [PRIMARY]
+) ON [PRIMARY]
+END
+GO
+SET ANSI_PADDING OFF
+GO
+SET IDENTITY_INSERT [dbo].[Payee] ON
+INSERT [dbo].[Payee] ([ID], [PayeeNamee], [PayeeNickname], [PayeeIdentifier], [DateAdded]) VALUES (8, N'r345456', N'roger', N'3232gf23', CAST(0x0000A033015C607D AS DateTime))
+INSERT [dbo].[Payee] ([ID], [PayeeNamee], [PayeeNickname], [PayeeIdentifier], [DateAdded]) VALUES (9, N'Rogers Montreal', N'Rog - M', N'Rog3539761', CAST(0x0000A033015D2CE4 AS DateTime))
+INSERT [dbo].[Payee] ([ID], [PayeeNamee], [PayeeNickname], [PayeeIdentifier], [DateAdded]) VALUES (12, N'Rogers', N'Rog', N'fdssdf321342', CAST(0x0000A0340151B001 AS DateTime))
+INSERT [dbo].[Payee] ([ID], [PayeeNamee], [PayeeNickname], [PayeeIdentifier], [DateAdded]) VALUES (13, N'Videotron', N'Video', N'tsdfVi4234w', CAST(0x0000A0340151C294 AS DateTime))
+SET IDENTITY_INSERT [dbo].[Payee] OFF
+/****** Object:  Table [dbo].[Moneycard]    Script Date: 07/10/2017 18:54:23 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[Moneycard]') AND type in (N'U'))
+BEGIN
+CREATE TABLE [dbo].[Moneycard](
+	[ID] [bigint] IDENTITY(1,1) NOT NULL,
+	[CardNumber] [bigint] NULL,
+	[Balance] [money] NOT NULL,
+	[DateIssued] [datetime] NOT NULL CONSTRAINT [DF_Moneycard_DateIssued]  DEFAULT (getdate()),
+ CONSTRAINT [PK_Moneycard] PRIMARY KEY CLUSTERED 
+(
+	[ID] ASC
+)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON) ON [PRIMARY]
+) ON [PRIMARY]
+END
+GO
+SET IDENTITY_INSERT [dbo].[Moneycard] ON
+INSERT [dbo].[Moneycard] ([ID], [CardNumber], [Balance], [DateIssued]) VALUES (14, 6598334455667788, 99.5000, CAST(0x0000A033014A0C59 AS DateTime))
+INSERT [dbo].[Moneycard] ([ID], [CardNumber], [Balance], [DateIssued]) VALUES (15, 6598334455667789, 0.0000, CAST(0x0000A033014CA1F4 AS DateTime))
+INSERT [dbo].[Moneycard] ([ID], [CardNumber], [Balance], [DateIssued]) VALUES (16, 6598334455667790, 0.0000, CAST(0x0000A03400D6A2BD AS DateTime))
+INSERT [dbo].[Moneycard] ([ID], [CardNumber], [Balance], [DateIssued]) VALUES (17, 6598334455667791, 101.0000, CAST(0x0000A791016FE420 AS DateTime))
+SET IDENTITY_INSERT [dbo].[Moneycard] OFF
+/****** Object:  Table [dbo].[Message_Log]    Script Date: 07/10/2017 18:54:22 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+SET ANSI_PADDING ON
+GO
+IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[Message_Log]') AND type in (N'U'))
+BEGIN
+CREATE TABLE [dbo].[Message_Log](
+	[ID] [bigint] IDENTITY(1,1) NOT NULL,
+	[MessageLog] [varchar](max) NULL,
+	[Operation] [varchar](50) NULL,
+	[LogDate] [datetime] NULL,
+ CONSTRAINT [PK_Message_Log] PRIMARY KEY CLUSTERED 
+(
+	[ID] ASC
+)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON) ON [PRIMARY]
+) ON [PRIMARY]
+END
+GO
+SET ANSI_PADDING OFF
+GO
+/****** Object:  Table [dbo].[Manager]    Script Date: 07/10/2017 18:54:22 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+SET ANSI_PADDING ON
+GO
+IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[Manager]') AND type in (N'U'))
+BEGIN
+CREATE TABLE [dbo].[Manager](
+	[ID] [bigint] IDENTITY(1,1) NOT NULL,
+	[ManagerName] [varchar](50) NOT NULL,
+	[ManagerPassword] [varchar](50) NOT NULL,
+	[ManagerAccessNumber] [bigint] NOT NULL,
+	[FirstName] [varchar](50) NOT NULL,
+	[LastName] [varchar](50) NOT NULL,
+	[Role] [varchar](50) NOT NULL,
+	[Sex] [varchar](10) NOT NULL,
+	[StartDate] [datetime] NOT NULL CONSTRAINT [DF_Manager_StartDate]  DEFAULT (getdate()),
+	[PhoneNumber] [varchar](50) NOT NULL,
+	[SIN] [bigint] NOT NULL,
+	[Active] [bit] NOT NULL CONSTRAINT [DF_Manager_Active]  DEFAULT ((1)),
+	[Email] [varchar](50) NOT NULL,
+ CONSTRAINT [PK_Manager] PRIMARY KEY CLUSTERED 
+(
+	[ID] ASC
+)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON) ON [PRIMARY]
+) ON [PRIMARY]
+END
+GO
+SET ANSI_PADDING OFF
+GO
+SET IDENTITY_INSERT [dbo].[Manager] ON
+INSERT [dbo].[Manager] ([ID], [ManagerName], [ManagerPassword], [ManagerAccessNumber], [FirstName], [LastName], [Role], [Sex], [StartDate], [PhoneNumber], [SIN], [Active], [Email]) VALUES (3, N'admin', N'5DAlg3LOt78=', 5148247341726469, N'admin', N'admin', N'Account Manager', N'Male', CAST(0x00009FEB00000000 AS DateTime), N'5144477777', 985431542, 1, N'manthan.makwana@gmail.com')
+SET IDENTITY_INSERT [dbo].[Manager] OFF
+/****** Object:  Table [dbo].[Error_Log]    Script Date: 07/10/2017 18:54:22 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+SET ANSI_PADDING ON
+GO
+IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[Error_Log]') AND type in (N'U'))
+BEGIN
+CREATE TABLE [dbo].[Error_Log](
+	[ID] [bigint] IDENTITY(1,1) NOT NULL,
+	[ErrorMessage] [varchar](max) NULL,
+	[UserType] [varchar](max) NULL,
+	[UserName] [varchar](max) NULL,
+	[Operation] [varchar](50) NULL,
+	[LogDate] [datetime] NULL,
+ CONSTRAINT [PK_Error_Log] PRIMARY KEY CLUSTERED 
+(
+	[ID] ASC
+)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON) ON [PRIMARY]
+) ON [PRIMARY]
+END
+GO
+SET ANSI_PADDING OFF
+GO
+SET IDENTITY_INSERT [dbo].[Error_Log] ON
+INSERT [dbo].[Error_Log] ([ID], [ErrorMessage], [UserType], [UserName], [Operation], [LogDate]) VALUES (152, N'Thread was being aborted.', N'Client', N'', N'Login', CAST(0x0000A034014A5CC7 AS DateTime))
+INSERT [dbo].[Error_Log] ([ID], [ErrorMessage], [UserType], [UserName], [Operation], [LogDate]) VALUES (153, N'The string was not recognized as a valid DateTime. There is a unknown word starting at index 10.', N'Client', N'57 - Abhinav Shah', N'View Statement', CAST(0x0000A034014A6EBF AS DateTime))
+INSERT [dbo].[Error_Log] ([ID], [ErrorMessage], [UserType], [UserName], [Operation], [LogDate]) VALUES (154, N'The string was not recognized as a valid DateTime. There is a unknown word starting at index 10.', N'Client', N'57 - Abhinav Shah', N'View Statement', CAST(0x0000A034014AD992 AS DateTime))
+INSERT [dbo].[Error_Log] ([ID], [ErrorMessage], [UserType], [UserName], [Operation], [LogDate]) VALUES (155, N'Thread was being aborted.', N'Client', N'', N'Login', CAST(0x0000A034014CE161 AS DateTime))
+INSERT [dbo].[Error_Log] ([ID], [ErrorMessage], [UserType], [UserName], [Operation], [LogDate]) VALUES (156, N'Thread was being aborted.', N'Client', N'', N'Login', CAST(0x0000A0340151444E AS DateTime))
+INSERT [dbo].[Error_Log] ([ID], [ErrorMessage], [UserType], [UserName], [Operation], [LogDate]) VALUES (157, N'Thread was being aborted.', N'Client', N'', N'Login', CAST(0x0000A7920170AE0F AS DateTime))
+INSERT [dbo].[Error_Log] ([ID], [ErrorMessage], [UserType], [UserName], [Operation], [LogDate]) VALUES (158, N'Thread was being aborted.', N'Client', N'', N'Login', CAST(0x0000A7920171F7ED AS DateTime))
+INSERT [dbo].[Error_Log] ([ID], [ErrorMessage], [UserType], [UserName], [Operation], [LogDate]) VALUES (159, N'Thread was being aborted.', N'Client', N'', N'Login', CAST(0x0000A79E00E62ECB AS DateTime))
+INSERT [dbo].[Error_Log] ([ID], [ErrorMessage], [UserType], [UserName], [Operation], [LogDate]) VALUES (160, N'Thread was being aborted.', N'Client', N'', N'Login', CAST(0x0000A79E012C5584 AS DateTime))
+INSERT [dbo].[Error_Log] ([ID], [ErrorMessage], [UserType], [UserName], [Operation], [LogDate]) VALUES (161, N'Thread was being aborted.', N'Client', N'', N'Login', CAST(0x0000A79E013CAD43 AS DateTime))
+INSERT [dbo].[Error_Log] ([ID], [ErrorMessage], [UserType], [UserName], [Operation], [LogDate]) VALUES (162, N'Thread was being aborted.', N'Client', N'', N'Login', CAST(0x0000A79E013F6C23 AS DateTime))
+SET IDENTITY_INSERT [dbo].[Error_Log] OFF
+/****** Object:  Table [dbo].[Client_Transaction]    Script Date: 07/10/2017 18:54:22 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[Client_Transaction]') AND type in (N'U'))
+BEGIN
+CREATE TABLE [dbo].[Client_Transaction](
+	[Client_ID] [bigint] NOT NULL,
+	[Transaction_ID] [bigint] NOT NULL
+) ON [PRIMARY]
+END
+GO
+INSERT [dbo].[Client_Transaction] ([Client_ID], [Transaction_ID]) VALUES (57, 125)
+INSERT [dbo].[Client_Transaction] ([Client_ID], [Transaction_ID]) VALUES (57, 126)
+INSERT [dbo].[Client_Transaction] ([Client_ID], [Transaction_ID]) VALUES (57, 130)
+INSERT [dbo].[Client_Transaction] ([Client_ID], [Transaction_ID]) VALUES (57, 131)
+INSERT [dbo].[Client_Transaction] ([Client_ID], [Transaction_ID]) VALUES (57, 132)
+INSERT [dbo].[Client_Transaction] ([Client_ID], [Transaction_ID]) VALUES (57, 133)
+INSERT [dbo].[Client_Transaction] ([Client_ID], [Transaction_ID]) VALUES (59, 134)
+INSERT [dbo].[Client_Transaction] ([Client_ID], [Transaction_ID]) VALUES (59, 136)
+INSERT [dbo].[Client_Transaction] ([Client_ID], [Transaction_ID]) VALUES (59, 137)
+INSERT [dbo].[Client_Transaction] ([Client_ID], [Transaction_ID]) VALUES (59, 138)
+INSERT [dbo].[Client_Transaction] ([Client_ID], [Transaction_ID]) VALUES (59, 139)
+INSERT [dbo].[Client_Transaction] ([Client_ID], [Transaction_ID]) VALUES (59, 140)
+INSERT [dbo].[Client_Transaction] ([Client_ID], [Transaction_ID]) VALUES (59, 141)
+INSERT [dbo].[Client_Transaction] ([Client_ID], [Transaction_ID]) VALUES (59, 142)
+INSERT [dbo].[Client_Transaction] ([Client_ID], [Transaction_ID]) VALUES (60, 143)
+INSERT [dbo].[Client_Transaction] ([Client_ID], [Transaction_ID]) VALUES (60, 144)
+INSERT [dbo].[Client_Transaction] ([Client_ID], [Transaction_ID]) VALUES (60, 145)
+INSERT [dbo].[Client_Transaction] ([Client_ID], [Transaction_ID]) VALUES (60, 146)
+INSERT [dbo].[Client_Transaction] ([Client_ID], [Transaction_ID]) VALUES (60, 148)
+INSERT [dbo].[Client_Transaction] ([Client_ID], [Transaction_ID]) VALUES (59, 135)
+INSERT [dbo].[Client_Transaction] ([Client_ID], [Transaction_ID]) VALUES (57, 127)
+INSERT [dbo].[Client_Transaction] ([Client_ID], [Transaction_ID]) VALUES (57, 128)
+INSERT [dbo].[Client_Transaction] ([Client_ID], [Transaction_ID]) VALUES (57, 129)
+INSERT [dbo].[Client_Transaction] ([Client_ID], [Transaction_ID]) VALUES (60, 147)
+/****** Object:  Table [dbo].[Client_SecurityQuestion]    Script Date: 07/10/2017 18:54:22 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+SET ANSI_PADDING ON
+GO
+IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[Client_SecurityQuestion]') AND type in (N'U'))
+BEGIN
+CREATE TABLE [dbo].[Client_SecurityQuestion](
+	[Client_ID] [bigint] NOT NULL,
+	[Question_ID] [bigint] NOT NULL,
+	[Answer] [varchar](max) NOT NULL
+) ON [PRIMARY]
+END
+GO
+SET ANSI_PADDING OFF
+GO
+INSERT [dbo].[Client_SecurityQuestion] ([Client_ID], [Question_ID], [Answer]) VALUES (58, 1, N'hobby')
+INSERT [dbo].[Client_SecurityQuestion] ([Client_ID], [Question_ID], [Answer]) VALUES (58, 2, N'tv')
+INSERT [dbo].[Client_SecurityQuestion] ([Client_ID], [Question_ID], [Answer]) VALUES (58, 3, N'destination')
+INSERT [dbo].[Client_SecurityQuestion] ([Client_ID], [Question_ID], [Answer]) VALUES (58, 4, N'birth')
+INSERT [dbo].[Client_SecurityQuestion] ([Client_ID], [Question_ID], [Answer]) VALUES (58, 5, N'sport')
+INSERT [dbo].[Client_SecurityQuestion] ([Client_ID], [Question_ID], [Answer]) VALUES (59, 1, N'hobby')
+INSERT [dbo].[Client_SecurityQuestion] ([Client_ID], [Question_ID], [Answer]) VALUES (59, 2, N'TV')
+INSERT [dbo].[Client_SecurityQuestion] ([Client_ID], [Question_ID], [Answer]) VALUES (59, 3, N'destination')
+INSERT [dbo].[Client_SecurityQuestion] ([Client_ID], [Question_ID], [Answer]) VALUES (59, 4, N'birth')
+INSERT [dbo].[Client_SecurityQuestion] ([Client_ID], [Question_ID], [Answer]) VALUES (59, 5, N'sport')
+INSERT [dbo].[Client_SecurityQuestion] ([Client_ID], [Question_ID], [Answer]) VALUES (60, 1, N'Tennis')
+INSERT [dbo].[Client_SecurityQuestion] ([Client_ID], [Question_ID], [Answer]) VALUES (60, 2, N'Tennis')
+INSERT [dbo].[Client_SecurityQuestion] ([Client_ID], [Question_ID], [Answer]) VALUES (60, 3, N'Montreal')
+INSERT [dbo].[Client_SecurityQuestion] ([Client_ID], [Question_ID], [Answer]) VALUES (60, 4, N'Surendranagar')
+INSERT [dbo].[Client_SecurityQuestion] ([Client_ID], [Question_ID], [Answer]) VALUES (60, 5, N'Tennis')
+INSERT [dbo].[Client_SecurityQuestion] ([Client_ID], [Question_ID], [Answer]) VALUES (57, 1, N'hobby')
+INSERT [dbo].[Client_SecurityQuestion] ([Client_ID], [Question_ID], [Answer]) VALUES (57, 2, N'tv')
+INSERT [dbo].[Client_SecurityQuestion] ([Client_ID], [Question_ID], [Answer]) VALUES (57, 3, N'destination')
+INSERT [dbo].[Client_SecurityQuestion] ([Client_ID], [Question_ID], [Answer]) VALUES (57, 4, N'birth')
+INSERT [dbo].[Client_SecurityQuestion] ([Client_ID], [Question_ID], [Answer]) VALUES (57, 5, N'sport')
+/****** Object:  Table [dbo].[Client_Payee]    Script Date: 07/10/2017 18:54:22 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[Client_Payee]') AND type in (N'U'))
+BEGIN
+CREATE TABLE [dbo].[Client_Payee](
+	[Payee_ID] [bigint] NOT NULL,
+	[Client_ID] [bigint] NOT NULL
+) ON [PRIMARY]
+END
+GO
+INSERT [dbo].[Client_Payee] ([Payee_ID], [Client_ID]) VALUES (8, 57)
+INSERT [dbo].[Client_Payee] ([Payee_ID], [Client_ID]) VALUES (12, 59)
+INSERT [dbo].[Client_Payee] ([Payee_ID], [Client_ID]) VALUES (13, 59)
+INSERT [dbo].[Client_Payee] ([Payee_ID], [Client_ID]) VALUES (9, 57)
+/****** Object:  Table [dbo].[Client_Moneycard]    Script Date: 07/10/2017 18:54:22 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[Client_Moneycard]') AND type in (N'U'))
+BEGIN
+CREATE TABLE [dbo].[Client_Moneycard](
+	[Client_ID] [bigint] NOT NULL,
+	[Moneycard_ID] [bigint] NOT NULL
+) ON [PRIMARY]
+END
+GO
+INSERT [dbo].[Client_Moneycard] ([Client_ID], [Moneycard_ID]) VALUES (57, 14)
+INSERT [dbo].[Client_Moneycard] ([Client_ID], [Moneycard_ID]) VALUES (58, 15)
+INSERT [dbo].[Client_Moneycard] ([Client_ID], [Moneycard_ID]) VALUES (59, 16)
+INSERT [dbo].[Client_Moneycard] ([Client_ID], [Moneycard_ID]) VALUES (60, 17)
+/****** Object:  Table [dbo].[Client_Account]    Script Date: 07/10/2017 18:54:21 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[Client_Account]') AND type in (N'U'))
+BEGIN
+CREATE TABLE [dbo].[Client_Account](
+	[Client_ID] [bigint] NOT NULL,
+	[Account_ID] [bigint] NOT NULL,
+	[Limit] [money] NOT NULL,
+	[MaxTransactions] [int] NULL
+) ON [PRIMARY]
+END
+GO
+INSERT [dbo].[Client_Account] ([Client_ID], [Account_ID], [Limit], [MaxTransactions]) VALUES (57, 35, 1000.0000, 25)
+INSERT [dbo].[Client_Account] ([Client_ID], [Account_ID], [Limit], [MaxTransactions]) VALUES (58, 37, 1000.0000, 25)
+INSERT [dbo].[Client_Account] ([Client_ID], [Account_ID], [Limit], [MaxTransactions]) VALUES (59, 38, 100.0000, 15)
+INSERT [dbo].[Client_Account] ([Client_ID], [Account_ID], [Limit], [MaxTransactions]) VALUES (59, 39, 1000.0000, 25)
+INSERT [dbo].[Client_Account] ([Client_ID], [Account_ID], [Limit], [MaxTransactions]) VALUES (59, 40, 1000.0000, 10)
+INSERT [dbo].[Client_Account] ([Client_ID], [Account_ID], [Limit], [MaxTransactions]) VALUES (60, 41, 1000.0000, 25)
+INSERT [dbo].[Client_Account] ([Client_ID], [Account_ID], [Limit], [MaxTransactions]) VALUES (60, 42, 1000.0000, 10)
+INSERT [dbo].[Client_Account] ([Client_ID], [Account_ID], [Limit], [MaxTransactions]) VALUES (57, 36, 1000.0000, 10)
+/****** Object:  Table [dbo].[Account_Transaction]    Script Date: 07/10/2017 18:54:21 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+SET ANSI_PADDING ON
+GO
+IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[Account_Transaction]') AND type in (N'U'))
+BEGIN
+CREATE TABLE [dbo].[Account_Transaction](
+	[Account_ID] [bigint] NOT NULL,
+	[Transaction_ID] [bigint] NOT NULL,
+	[ToAccount_ID] [bigint] NULL,
+	[Type] [varchar](50) NULL
+) ON [PRIMARY]
+END
+GO
+SET ANSI_PADDING OFF
+GO
+INSERT [dbo].[Account_Transaction] ([Account_ID], [Transaction_ID], [ToAccount_ID], [Type]) VALUES (35, 125, 35, N'Check')
+INSERT [dbo].[Account_Transaction] ([Account_ID], [Transaction_ID], [ToAccount_ID], [Type]) VALUES (35, 126, 35, N'Cash')
+INSERT [dbo].[Account_Transaction] ([Account_ID], [Transaction_ID], [ToAccount_ID], [Type]) VALUES (36, 130, 37, N'Account')
+INSERT [dbo].[Account_Transaction] ([Account_ID], [Transaction_ID], [ToAccount_ID], [Type]) VALUES (35, 131, 8, N'Pay Bill')
+INSERT [dbo].[Account_Transaction] ([Account_ID], [Transaction_ID], [ToAccount_ID], [Type]) VALUES (35, 132, 35, N'Cash')
+INSERT [dbo].[Account_Transaction] ([Account_ID], [Transaction_ID], [ToAccount_ID], [Type]) VALUES (36, 133, 36, N'Cash')
+INSERT [dbo].[Account_Transaction] ([Account_ID], [Transaction_ID], [ToAccount_ID], [Type]) VALUES (38, 134, 38, N'Cash')
+INSERT [dbo].[Account_Transaction] ([Account_ID], [Transaction_ID], [ToAccount_ID], [Type]) VALUES (38, 136, 38, N'Check')
+INSERT [dbo].[Account_Transaction] ([Account_ID], [Transaction_ID], [ToAccount_ID], [Type]) VALUES (38, 137, 38, N'Check')
+INSERT [dbo].[Account_Transaction] ([Account_ID], [Transaction_ID], [ToAccount_ID], [Type]) VALUES (38, 138, 38, N'Check')
+INSERT [dbo].[Account_Transaction] ([Account_ID], [Transaction_ID], [ToAccount_ID], [Type]) VALUES (39, 139, 39, N'Check')
+INSERT [dbo].[Account_Transaction] ([Account_ID], [Transaction_ID], [ToAccount_ID], [Type]) VALUES (39, 140, 39, N'Check')
+INSERT [dbo].[Account_Transaction] ([Account_ID], [Transaction_ID], [ToAccount_ID], [Type]) VALUES (39, 141, 39, N'Cash')
+INSERT [dbo].[Account_Transaction] ([Account_ID], [Transaction_ID], [ToAccount_ID], [Type]) VALUES (38, 142, 12, N'Pay Bill')
+INSERT [dbo].[Account_Transaction] ([Account_ID], [Transaction_ID], [ToAccount_ID], [Type]) VALUES (42, 143, 42, N'Cash')
+INSERT [dbo].[Account_Transaction] ([Account_ID], [Transaction_ID], [ToAccount_ID], [Type]) VALUES (41, 144, 41, N'Cash')
+INSERT [dbo].[Account_Transaction] ([Account_ID], [Transaction_ID], [ToAccount_ID], [Type]) VALUES (41, 145, 17, N'MoneyCard')
+INSERT [dbo].[Account_Transaction] ([Account_ID], [Transaction_ID], [ToAccount_ID], [Type]) VALUES (41, 146, 17, N'MoneyCard')
+INSERT [dbo].[Account_Transaction] ([Account_ID], [Transaction_ID], [ToAccount_ID], [Type]) VALUES (41, 148, 42, N'Account')
+INSERT [dbo].[Account_Transaction] ([Account_ID], [Transaction_ID], [ToAccount_ID], [Type]) VALUES (40, 135, 40, N'Cash')
+INSERT [dbo].[Account_Transaction] ([Account_ID], [Transaction_ID], [ToAccount_ID], [Type]) VALUES (35, 127, 14, N'MoneyCard')
+INSERT [dbo].[Account_Transaction] ([Account_ID], [Transaction_ID], [ToAccount_ID], [Type]) VALUES (35, 128, 14, N'MoneyCard')
+INSERT [dbo].[Account_Transaction] ([Account_ID], [Transaction_ID], [ToAccount_ID], [Type]) VALUES (35, 129, 36, N'Account')
+INSERT [dbo].[Account_Transaction] ([Account_ID], [Transaction_ID], [ToAccount_ID], [Type]) VALUES (41, 147, 41, N'Cash')
+/****** Object:  Table [dbo].[Account_Manager]    Script Date: 07/10/2017 18:54:21 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[Account_Manager]') AND type in (N'U'))
+BEGIN
+CREATE TABLE [dbo].[Account_Manager](
+	[Account_ID] [bigint] NOT NULL,
+	[Manager_ID] [bigint] NOT NULL
+) ON [PRIMARY]
+END
+GO
+/****** Object:  StoredProcedure [dbo].[sp_checkuser]    Script Date: 07/10/2017 18:54:28 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[sp_checkuser]') AND type in (N'P', N'PC'))
+BEGIN
+EXEC dbo.sp_executesql @statement = N'-- =============================================
+-- Author:		<Author,,Name>
+-- Create date: <Create Date,,>
+-- Description:	<Description,,>
+-- =============================================
+CREATE PROCEDURE [dbo].[sp_checkuser]
+	-- Add the parameters for the stored procedure here
+	@Username varchar(50),
+	@Password varchar(50)
+AS
+BEGIN
+	-- SET NOCOUNT ON added to prevent extra result sets from
+	-- interfering with SELECT statements.
+	SET NOCOUNT ON;
+
+    -- Insert statements for procedure here
+	SELECT * from Client where FirstName = @Username AND [ClientPassword] = @Password  
+END
+' 
+END
+GO
+/****** Object:  StoredProcedure [dbo].[sp_BlockAccount]    Script Date: 07/10/2017 18:54:28 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[sp_BlockAccount]') AND type in (N'P', N'PC'))
+BEGIN
+EXEC dbo.sp_executesql @statement = N'-- =============================================
+-- Author:		<Author,,Name>
+-- Create date: <Create Date,,>
+-- Description:	<Description,,>
+-- =============================================
+CREATE PROCEDURE [dbo].[sp_BlockAccount]
+	-- Add the parameters for the stored procedure here
+		 @AccessNumber AS BIGINT,
+		 @Return_Value AS BIGINT OUTPUT
+AS
+BEGIN
+	-- SET NOCOUNT ON added to prevent extra result sets from
+	-- interfering with SELECT statements.
+	SET NOCOUNT ON;
+
+	BEGIN TRY
+			UPDATE Client
+			SET Active = ''Blocked''
+			Where ClientCardNumber = @AccessNumber
+			
+			SET @Return_Value = 1
+    END TRY
+    BEGIN CATCH
+    
+		SET @Return_Value = -1
+    END CATCH
+END
+' 
+END
+GO
+/****** Object:  StoredProcedure [dbo].[sp_AuthenticateManager]    Script Date: 07/10/2017 18:54:28 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[sp_AuthenticateManager]') AND type in (N'P', N'PC'))
+BEGIN
+EXEC dbo.sp_executesql @statement = N'-- =============================================
+-- Author:		<Author,,Name>
+-- Create date: <Create Date,,>
+-- Description:	<Description,,>
+-- =============================================
+CREATE PROCEDURE [dbo].[sp_AuthenticateManager]
+	-- Add the parameters for the stored procedure here
+		 @ManagerUserName AS VARCHAR(MAX),
+		 @ManagerAccessNumber AS BIGINT
+         ,@ManagerPassword AS varchar(50)
+         
+           ,@Return_Value bigint output
+AS
+BEGIN
+	-- SET NOCOUNT ON added to prevent extra result sets from
+	-- interfering with SELECT statements.
+	SET NOCOUNT ON;
+
+	BEGIN TRY
+			IF EXISTS(SELECT * FROM Manager  WHERE ManagerName = @ManagerUserName AND  ManagerAccessNumber = @ManagerAccessNumber AND ManagerPassword = @ManagerPassword AND Active = 1)
+			BEGIN 
+				--IF  EXISTS(SELECT * FROM Client  WHERE ClientCardNumber = @ClientCardNumber AND ClientPassword = @ClientPassword AND Active = 1)
+				--BEGIN
+					SELECT * FROM Manager  WHERE ManagerName = @ManagerUserName AND  ManagerAccessNumber = @ManagerAccessNumber AND ManagerPassword = @ManagerPassword AND Active = 1
+					SET @return_value = 1
+				--END
+				--ELSE 
+				--BEGIN
+				--	SET @return_value = -2
+				--END
+			END
+			ELSE 
+			BEGIN	
+				SET @return_value = -1
+			END
+    END TRY
+    BEGIN CATCH
+    
+		SET @return_value = -1
+    END CATCH
+END
+' 
+END
+GO
+/****** Object:  StoredProcedure [dbo].[sp_AuthenticateClient]    Script Date: 07/10/2017 18:54:28 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[sp_AuthenticateClient]') AND type in (N'P', N'PC'))
+BEGIN
+EXEC dbo.sp_executesql @statement = N'-- =============================================
+-- Author:		<Author,,Name>
+-- Create date: <Create Date,,>
+-- Description:	<Description,,>
+-- =============================================
+CREATE PROCEDURE [dbo].[sp_AuthenticateClient]
+	-- Add the parameters for the stored procedure here
+		 @ClientCardNumber AS BIGINT
+         ,@ClientPassword AS varchar(50)
+         
+           ,@Return_Value bigint output
+AS
+BEGIN
+	-- SET NOCOUNT ON added to prevent extra result sets from
+	-- interfering with SELECT statements.
+	SET NOCOUNT ON;
+
+	BEGIN TRY
+	IF EXISTS (SELECT * FROM Client  WHERE ClientCardNumber = @ClientCardNumber)
+				BEGIN
+					IF EXISTS(SELECT * FROM Client  WHERE ClientCardNumber = @ClientCardNumber AND ClientPassword = @ClientPassword)
+					BEGIN 
+						
+						
+							IF  EXISTS(SELECT * FROM Client  WHERE ClientCardNumber = @ClientCardNumber AND ClientPassword = @ClientPassword AND Active = ''Approved'')
+							BEGIN
+								SELECT * FROM Client  WHERE ClientCardNumber = @ClientCardNumber AND ClientPassword = @ClientPassword AND Active = ''Approved'' 
+								SET @return_value = 1
+							END
+							else if EXISTS(SELECT * FROM Client  WHERE ClientCardNumber = @ClientCardNumber AND ClientPassword = @ClientPassword AND Active = ''Blocked'')
+							begin
+							SELECT * FROM Client
+								SET @return_value = -3
+							end
+							ELSE 
+							BEGIN
+								SET @return_value = -2
+							END
+					END
+					ELSE 
+					BEGIN	
+						SELECT * FROM Client
+						SET @return_value = 2
+					END
+			END
+			
+			
+    END TRY
+    BEGIN CATCH
+    
+		SET @return_value = -1
+    END CATCH
+END
+' 
+END
+GO
+/****** Object:  UserDefinedFunction [dbo].[sp_GetClient]    Script Date: 07/10/2017 18:54:30 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[sp_GetClient]') AND type in (N'FN', N'IF', N'TF', N'FS', N'FT'))
+BEGIN
+execute dbo.sp_executesql @statement = N'-- =============================================
+-- Author:		<Author,,Name>
+-- Create date: <Create Date,,>
+-- Description:	<Description,,>
+-- =============================================
+CREATE FUNCTION [dbo].[sp_GetClient] 
+(	
+	-- Add the parameters for the function here
+	@status varchar(50)
+)
+RETURNS TABLE 
+AS
+RETURN 
+(
+	-- Add the SELECT statement with parameter references here
+	/****** Script for SelectTopNRows command from SSMS  ******/
+SELECT [ID]
+      ,[ClientCardNumber]
+      ,[ClientPassword]
+      ,[FirstName]
+      ,[LastName]
+      ,[Sex]
+      ,[Email]
+      ,[DateOfBirth]
+      ,[Contactnumber]
+      ,[Address]
+      ,[City]
+      ,[PostalCode]
+      ,[Province]
+      ,[SIN]
+      ,[Active]
+  FROM [atmdb].[dbo].[Client]
+  WHERE Active = @status
+)
+' 
+END
+GO
+/****** Object:  StoredProcedure [dbo].[sp_GetAllClients]    Script Date: 07/10/2017 18:54:28 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[sp_GetAllClients]') AND type in (N'P', N'PC'))
+BEGIN
+EXEC dbo.sp_executesql @statement = N'-- =============================================
+-- Author:		<Author,,Name>
+-- Create date: <Create Date,,>
+-- Description:	<Description,,>
+-- =============================================
+CREATE PROCEDURE [dbo].[sp_GetAllClients]
+
+AS
+BEGIN
+	-- SET NOCOUNT ON added to prevent extra result sets from
+	-- interfering with SELECT statements.
+	SET NOCOUNT ON;
+
+    -- Insert statements for procedure here
+    BEGIN TRY       
+		
+			SELECT Client.ID, FirstName + '' '' + LastName as [Client Name],
+			Sex,
+			Email,
+			Convert(Varchar(10),DateOfBirth,110) as [Date of Birth], 
+			Contactnumber,
+			City,
+			PostalCode,
+			Province,
+			Case Active when ''Approved'' then Convert(bit,''True'')
+			else Convert(bit,''False'') end as [Account Status],
+			Case Active when ''Approved'' then ''Yes''
+			else ''No'' end as [Status]	
+			FROM Client
+			where ClientCardNumber IS NOT Null
+
+		
+	End Try
+	BEGIN CATCH
+		
+	END CATCH
+	
+END
+' 
+END
+GO
+/****** Object:  StoredProcedure [dbo].[sp_EditPayee]    Script Date: 07/10/2017 18:54:28 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[sp_EditPayee]') AND type in (N'P', N'PC'))
+BEGIN
+EXEC dbo.sp_executesql @statement = N'-- =============================================
+-- Author:		<Author,,Name>
+-- Create date: <Create Date,,>
+-- Description:	<Description,,>
+-- =============================================
+CREATE PROCEDURE [dbo].[sp_EditPayee]
+@ClientID as bigint,
+@PayeeID as bigint,
+@PayeeName AS Varchar(MAX),
+@AccountIdentifier as Varchar(MAX),
+@PayeeNickName AS Varchar(MAX),
+@Return_Value AS BIGINT OUTPUT
+AS
+BEGIN
+	-- SET NOCOUNT ON added to prevent extra result sets from
+	-- interfering with SELECT statements.
+	SET NOCOUNT ON;
+
+    -- Insert statements for procedure here
+    BEGIN TRY     
+      
+      IF(NOT EXISTS(SELECT PayeeIdentifier FROM Payee WHERE PayeeIdentifier = @AccountIdentifier and ID <> @PayeeID))
+      begin
+		UPDATE Payee
+		SET PayeeNamee = @PayeeName, 
+		PayeeNickname = @PayeeNickName
+		where ID = @PayeeID 
+		
+      
+		--INSERT INTO Payee 
+		--(PayeeNamee, PayeeNickname, PayeeIdentifier)
+		--values(@PayeeName,@PayeeNickName,@AccountIdentifier)
+		
+		--insert into Client_Payee 
+		--( Client_ID, Payee_ID)
+		--values(@ClientID,@@IDENTITY)
+		
+		SET @Return_Value = 1
+	end
+	else
+	begin
+		SET @Return_Value = -1
+	
+	end
+	
+	End Try
+	BEGIN CATCH
+		
+	END CATCH
+	
+END
+' 
+END
+GO
+/****** Object:  StoredProcedure [dbo].[sp_GetPendingCounts]    Script Date: 07/10/2017 18:54:28 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[sp_GetPendingCounts]') AND type in (N'P', N'PC'))
+BEGIN
+EXEC dbo.sp_executesql @statement = N'-- =============================================
+-- Author:		<Author,,Name>
+-- Create date: <Create Date,,>
+-- Description:	<Description,,>
+-- =============================================
+CREATE PROCEDURE [dbo].[sp_GetPendingCounts]
+	
+AS
+BEGIN
+	-- SET NOCOUNT ON added to prevent extra result sets from
+	-- interfering with SELECT statements.
+	SET NOCOUNT ON;
+DECLARE @PendingCount TABLE
+(
+  PendingType varchar(max),
+  PendingCount int
+)
+    -- Insert statements for procedure here
+    BEGIN TRY       
+		
+
+	Insert into @PendingCount
+	select ''Pending Approvals'',COUNT(ID) from [Transaction]
+	where [Status] = ''Pending''
+	
+	
+	Insert into @PendingCount
+	Select ''Pending Applications'', COUNT(ID) from Client 
+	where Active = ''Pending'' and ClientCardNumber IS NULL
+		
+		select * from @PendingCount
+	End Try
+	BEGIN CATCH
+		
+	END CATCH
+	
+END
+' 
+END
+GO
+/****** Object:  StoredProcedure [dbo].[sp_GetPendingApplications]    Script Date: 07/10/2017 18:54:28 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[sp_GetPendingApplications]') AND type in (N'P', N'PC'))
+BEGIN
+EXEC dbo.sp_executesql @statement = N'-- =============================================
+-- Author:		<Author,,Name>
+-- Create date: <Create Date,,>
+-- Description:	<Description,,>
+-- =============================================
+CREATE PROCEDURE [dbo].[sp_GetPendingApplications]
+	
+AS
+BEGIN
+	-- SET NOCOUNT ON added to prevent extra result sets from
+	-- interfering with SELECT statements.
+	SET NOCOUNT ON;
+
+    -- Insert statements for procedure here
+    BEGIN TRY       
+		
+		Select [ID],
+		FirstName as [First Name], 
+		LastName as [Last Name],
+		--Sex,
+		Email,
+		convert(varchar(10),DateOfBirth, 103) as [Date of Birth],
+		Contactnumber as [Contact Number]
+		--[Address],
+		--PostalCode,
+		--Province
+		--[SIN]
+		FROM Client
+		where [Active] = ''Pending''	
+		and ClientCardNumber IS NULL
+	End Try
+	BEGIN CATCH
+		
+	END CATCH
+	
+END
+' 
+END
+GO
+/****** Object:  StoredProcedure [dbo].[sp_GetSelectedAccount]    Script Date: 07/10/2017 18:54:28 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[sp_GetSelectedAccount]') AND type in (N'P', N'PC'))
+BEGIN
+EXEC dbo.sp_executesql @statement = N'-- =============================================
+-- Author:		<Author,,Name>
+-- Create date: <Create Date,,>
+-- Description:	<Description,,>
+-- =============================================
+CREATE PROCEDURE [dbo].[sp_GetSelectedAccount]
+	@ClientID AS BIGINT,
+	@AccountID	AS BIGINT
+AS
+BEGIN
+	-- SET NOCOUNT ON added to prevent extra result sets from
+	-- interfering with SELECT statements.
+	SET NOCOUNT ON;
+
+    -- Insert statements for procedure here
+    BEGIN TRY       
+		
+		SELECT ID, AccountNumber, DateCreated, [Type], TotalBalance, Convert(Decimal (18,2), AvailableBalance) as [AvailableBalance], Fee, InterestRate, LastAccessed, Active  FROM Account
+		WHERE ID = @AccountID
+		
+	End Try
+	BEGIN CATCH
+		
+	END CATCH
+	
+END
+' 
+END
+GO
+/****** Object:  StoredProcedure [dbo].[sp_LoadSecurityQuestion]    Script Date: 07/10/2017 18:54:29 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[sp_LoadSecurityQuestion]') AND type in (N'P', N'PC'))
+BEGIN
+EXEC dbo.sp_executesql @statement = N'-- =============================================
+-- Author:		<Author,,Name>
+-- Create date: <Create Date,,>
+-- Description:	<Description,,>
+-- =============================================
+CREATE PROCEDURE [dbo].[sp_LoadSecurityQuestion]
+	-- Add the parameters for the stored procedure here
+AS
+BEGIN
+	-- SET NOCOUNT ON added to prevent extra result sets from
+	-- interfering with SELECT statements.
+	SET NOCOUNT ON;
+
+    -- Insert statements for procedure here
+    BEGIN TRY       
+		SELECT ID as [ID], Question as [Question] from SecurityQuestion 
+	End Try
+	BEGIN CATCH
+		
+	END CATCH
+	
+END
+' 
+END
+GO
+/****** Object:  StoredProcedure [dbo].[sp_ManageUser]    Script Date: 07/10/2017 18:54:29 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[sp_ManageUser]') AND type in (N'P', N'PC'))
+BEGIN
+EXEC dbo.sp_executesql @statement = N'-- =============================================
+-- Author:		<Author,,Name>
+-- Create date: <Create Date,,>
+-- Description:	<Description,,>
+-- =============================================
+CREATE PROCEDURE [dbo].[sp_ManageUser]
+@ClientID as bigint
+AS
+BEGIN
+	-- SET NOCOUNT ON added to prevent extra result sets from
+	-- interfering with SELECT statements.
+	SET NOCOUNT ON;
+
+    -- Insert statements for procedure here
+    BEGIN TRY       
+		
+		declare @Status as varchar(50)
+		
+		select @Status = Active from Client where ID = @ClientID
+		
+		if(@Status = ''Approved'')
+		begin
+			update Client set Active = ''Pending'' where ID = @ClientID
+		end
+		else
+		begin
+			update Client set Active = ''Approved'' where ID = @ClientID
+		
+		end
+			--SELECT Client.ID, FirstName + '' '' + LastName as [Client Name],
+			--Sex,
+			--Email,
+			--Convert(Varchar(10),DateOfBirth,110) as [Date of Birth], 
+			--Contactnumber,
+			--City,
+			--PostalCode,
+			--Province,
+			--Case Active when ''Approved'' then Convert(bit,''True'')
+			--else Convert(bit,''False'') end as [Account Status]
+					
+			--FROM Client
+
+		
+	End Try
+	BEGIN CATCH
+		
+	END CATCH
+	
+END
+' 
+END
+GO
+/****** Object:  StoredProcedure [dbo].[sp_Random_SecurityQuestion]    Script Date: 07/10/2017 18:54:29 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[sp_Random_SecurityQuestion]') AND type in (N'P', N'PC'))
+BEGIN
+EXEC dbo.sp_executesql @statement = N'-- =============================================
+-- Author:		<Author,,Name>
+-- Create date: <Create Date,,>
+-- Description:	<Description,,>
+-- =============================================
+CREATE PROCEDURE [dbo].[sp_Random_SecurityQuestion]
+	-- Add the parameters for the stored procedure here
+	@ID AS BIGINT
+AS
+BEGIN
+	-- SET NOCOUNT ON added to prevent extra result sets from
+	-- interfering with SELECT statements.
+	SET NOCOUNT ON;
+
+	IF(@ID = 0)
+	BEGIN
+
+	SELECT top 1 * FROM SecurityQuestion
+		 ORDER BY NEWID()
+		END
+		ELSE
+		
+		BEGIN
+		SELECT top 1 * FROM SecurityQuestion
+		WHERE ID=@ID	 ORDER BY NEWID()
+		END
+		--END
+		
+	
+END
+' 
+END
+GO
+/****** Object:  StoredProcedure [dbo].[sp_TrackErrorLog]    Script Date: 07/10/2017 18:54:29 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[sp_TrackErrorLog]') AND type in (N'P', N'PC'))
+BEGIN
+EXEC dbo.sp_executesql @statement = N'-- =============================================
+-- Author:		<Author,,Name>
+-- Create date: <Create Date,,>
+-- Description:	<Description,,>
+-- =============================================
+CREATE PROCEDURE [dbo].[sp_TrackErrorLog]
+	-- Add the parameters for the stored procedure here
+		@ErrorMessage as varchar(MAX),
+		@UserType as varchar(MAX),
+        @UserName as varchar(MAX),
+        @Operation as varchar(50)
+         
+         
+AS
+BEGIN
+	-- SET NOCOUNT ON added to prevent extra result sets from
+	-- interfering with SELECT statements.
+	SET NOCOUNT ON;
+
+	INSERT INTO ERROR_Log
+	(ErrorMessage, UserType, UserName, Operation, LogDate)
+	values(@ErrorMessage, @UserType, @UserName, @Operation, GETDATE())
+	
+	
+END
+' 
+END
+GO
+/****** Object:  StoredProcedure [dbo].[sp_ShowErrorLogs]    Script Date: 07/10/2017 18:54:29 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[sp_ShowErrorLogs]') AND type in (N'P', N'PC'))
+BEGIN
+EXEC dbo.sp_executesql @statement = N'-- =============================================
+-- Author:		<Author,,Name>
+-- Create date: <Create Date,,>
+-- Description:	<Description,,>
+-- =============================================
+CREATE PROCEDURE [dbo].[sp_ShowErrorLogs]
+	-- Add the parameters for the stored procedure here
+      
+AS
+BEGIN
+	-- SET NOCOUNT ON added to prevent extra result sets from
+	-- interfering with SELECT statements.
+	SET NOCOUNT ON;
+
+	SELECT * FROM Error_Log
+	ORDER BY LogDate DESC
+	
+END
+' 
+END
+GO
+/****** Object:  StoredProcedure [dbo].[sp_RegisterClient]    Script Date: 07/10/2017 18:54:29 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[sp_RegisterClient]') AND type in (N'P', N'PC'))
+BEGIN
+EXEC dbo.sp_executesql @statement = N'-- =============================================
+-- Author:		<Author,,Name>
+-- Create date: <Create Date,,>
+-- Description:	<Description,,>
+-- =============================================
+CREATE PROCEDURE [dbo].[sp_RegisterClient]
+	-- Add the parameters for the stored procedure here
+		  
+         @ClientPassword AS varchar(50),
+         @FirstName varchar(50)
+          ,@LastName varchar(50)
+           ,@Sex varchar(10)
+           ,@Email varchar(50)
+           ,@DateOfBirth varchar(50)
+           ,@Contactnumber varchar(50)
+           ,@Address varchar(100)
+           ,@City varchar(50)
+           ,@PostalCode AS varchar(10)
+           ,@Province  varchar(50)
+           ,@SIN bigint
+           ,@Return_Value bigint output
+AS
+BEGIN
+	-- SET NOCOUNT ON added to prevent extra result sets from
+	-- interfering with SELECT statements.
+	SET NOCOUNT ON;
+
+	BEGIN TRY
+	
+	if @SIN = 0
+	begin
+	set @SIN = null
+	end
+	
+	IF NOT EXISTS(SELECT * FROM Client  WHERE Email = @Email)
+	BEGIN
+    INSERT INTO [atmdb].[dbo].[Client]
+           ([ClientCardNumber]
+           ,[ClientPassword]
+           ,[FirstName]
+           ,[LastName]
+           ,[Sex]
+           ,[Email]
+           ,[DateOfBirth]
+           ,[Contactnumber]
+           ,[Address]
+           ,[City]
+           ,[PostalCode]
+           ,[Province]
+           ,[SIN]
+           ,[Active])
+     VALUES
+            (null,@ClientPassword,
+         @FirstName
+          ,@LastName
+           ,@Sex
+           ,@Email
+           ,@DateOfBirth
+           ,@Contactnumber
+           ,@Address
+           ,@City
+           ,@PostalCode
+           ,@Province
+           ,@SIN
+           ,''Pending'')
+           
+           set @return_value = @@Identity
+        END
+        ELSE
+        BEGIN
+			set @return_value = -2 --WHEN EMAILID IS ALREADY USED
+        END
+        END TRY
+        BEGIN CATCH
+        
+			RETURN -1
+        END CATCH
+END
+' 
+END
+GO
+/****** Object:  UserDefinedFunction [dbo].[tbv_GetClient]    Script Date: 07/10/2017 18:54:30 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[tbv_GetClient]') AND type in (N'FN', N'IF', N'TF', N'FS', N'FT'))
+BEGIN
+execute dbo.sp_executesql @statement = N'-- =============================================
+-- Author:		<Author,,Name>
+-- Create date: <Create Date,,>
+-- Description:	<Description,,>
+-- =============================================
+CREATE FUNCTION [dbo].[tbv_GetClient] 
+(	
+	-- Add the parameters for the function here
+	@status varchar(50)
+)
+RETURNS TABLE 
+AS
+RETURN 
+(
+	-- Add the SELECT statement with parameter references here
+	/****** Script for SelectTopNRows command from SSMS  ******/
+SELECT [ID]
+  FROM [atmdb].[dbo].[Client]
+  WHERE Active = @status
+)
+' 
+END
+GO
+/****** Object:  StoredProcedure [dbo].[sp_UpdateClient]    Script Date: 07/10/2017 18:54:29 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[sp_UpdateClient]') AND type in (N'P', N'PC'))
+BEGIN
+EXEC dbo.sp_executesql @statement = N'-- =============================================
+-- Author:		<Author,,Name>
+-- Create date: <Create Date,,>
+-- Description:	<Description,,>
+-- =============================================
+CREATE PROCEDURE [dbo].[sp_UpdateClient]
+	-- Add the parameters for the stored procedure here
+		 @ClientID as bigint,
+         @ClientPassword AS varchar(50),
+         @FirstName varchar(50)
+          ,@LastName varchar(50)
+           ,@Sex varchar(10)
+           ,@Email varchar(50)
+           ,@DateOfBirth varchar(50)
+           ,@Contactnumber varchar(50)
+           ,@Address varchar(100)
+           ,@City varchar(50)
+           ,@PostalCode AS varchar(10)
+           ,@Province  varchar(50)
+           ,@SIN bigint
+           ,@Return_Value bigint output
+AS
+BEGIN
+	-- SET NOCOUNT ON added to prevent extra result sets from
+	-- interfering with SELECT statements.
+	SET NOCOUNT ON;
+
+	BEGIN TRY
+	
+	if @SIN = 0
+	begin
+		set @SIN = null
+	end
+	
+	IF NOT EXISTS(SELECT * FROM Client  WHERE Email = @Email and ID <> @ClientID)
+	BEGIN
+    UPDATE [atmdb].[dbo].[Client]
+   SET [ClientPassword] = @ClientPassword
+      ,[FirstName] = @FirstName
+      ,[LastName] = @LastName
+      ,[Sex] = @Sex
+      ,[Email] = @Email
+      ,[DateOfBirth] = @DateOfBirth
+      ,[Contactnumber] = @Contactnumber
+      ,[Address] = @Address
+      ,[City] = @City
+      ,[PostalCode] = @PostalCode
+      ,[Province] = @Province
+      ,[SIN] = @SIN
+ WHERE ID = @ClientID 
+
+           
+           set @return_value = @ClientID
+        END
+        ELSE
+        BEGIN
+			set @return_value = -2 --WHEN EMAILID IS ALREADY USED
+        END
+        END TRY
+        BEGIN CATCH
+        
+			RETURN -1
+        END CATCH
+END
+' 
+END
+GO
+/****** Object:  StoredProcedure [dbo].[sp_UpdatePayee]    Script Date: 07/10/2017 18:54:29 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[sp_UpdatePayee]') AND type in (N'P', N'PC'))
+BEGIN
+EXEC dbo.sp_executesql @statement = N'-- =============================================
+-- Author:		<Author,,Name>
+-- Create date: <Create Date,,>
+-- Description:	<Description,,>
+-- =============================================
+CREATE PROCEDURE [dbo].[sp_UpdatePayee]
+@ClientID as bigint,
+@PayeeID as bigint,
+@PayeeName AS Varchar(MAX),
+@AccountIdentifier as Varchar(MAX),
+@PayeeNickName AS Varchar(MAX),
+@Return_Value AS BIGINT OUTPUT
+AS
+BEGIN
+	-- SET NOCOUNT ON added to prevent extra result sets from
+	-- interfering with SELECT statements.
+	SET NOCOUNT ON;
+
+    -- Insert statements for procedure here
+    BEGIN TRY     
+      
+      IF(NOT EXISTS(SELECT PayeeIdentifier FROM Payee WHERE PayeeIdentifier = @AccountIdentifier and ID <> @PayeeID))
+      begin
+		UPDATE Payee
+		SET PayeeNamee = @PayeeName, 
+		PayeeNickname = @PayeeNickName
+		where ID = @PayeeID 
+		
+      
+		--INSERT INTO Payee 
+		--(PayeeNamee, PayeeNickname, PayeeIdentifier)
+		--values(@PayeeName,@PayeeNickName,@AccountIdentifier)
+		
+		--insert into Client_Payee 
+		--( Client_ID, Payee_ID)
+		--values(@ClientID,@@IDENTITY)
+		
+		SET @Return_Value = 1
+	end
+	else
+	begin
+		SET @Return_Value = -1
+	
+	end
+	
+	End Try
+	BEGIN CATCH
+		
+	END CATCH
+	
+END
+' 
+END
+GO
+/****** Object:  View [dbo].[view_clientAccounts]    Script Date: 07/10/2017 18:54:24 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+IF NOT EXISTS (SELECT * FROM sys.views WHERE object_id = OBJECT_ID(N'[dbo].[view_clientAccounts]'))
+EXEC dbo.sp_executesql @statement = N'CREATE VIEW [dbo].[view_clientAccounts] as
+SELECT     Client.ID, Client.ClientCardNumber, Client.FirstName, Client.LastName, Client.Email, Client.Active, Client_Account.Client_ID, Client_Account.Account_ID, Client_Account.Limit, 
+                      Client_Account.MaxTransactions
+FROM         Client INNER JOIN
+                      Client_Account ON Client.ID = Client_Account.Client_ID
+                      WHERE Client.Active = ''Approved'';'
+GO
+/****** Object:  StoredProcedure [dbo].[sp_UpdateClientSecurityAnswer]    Script Date: 07/10/2017 18:54:29 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[sp_UpdateClientSecurityAnswer]') AND type in (N'P', N'PC'))
+BEGIN
+EXEC dbo.sp_executesql @statement = N'-- =============================================
+-- Author:		<Author,,Name>
+-- Create date: <Create Date,,>
+-- Description:	<Description,,>
+-- =============================================
+CREATE PROCEDURE [dbo].[sp_UpdateClientSecurityAnswer]
+	-- Add the parameters for the stored procedure here
+	@Client_ID BIGINT,
+	@Question_ID BIGINT,
+	@Answer VARCHAR(MAX)
+AS
+BEGIN
+	-- SET NOCOUNT ON added to prevent extra result sets from
+	-- interfering with SELECT statements.
+	SET NOCOUNT ON;
+
+	BEGIN TRY
+	
+    -- Insert statements for procedure here
+	UPDATE [atmdb].[dbo].[Client_SecurityQuestion]
+	set [Answer] = @Answer
+	where Client_ID = @Client_ID and Question_ID = @Question_ID
+           
+           RETURN 1
+	END TRY
+	BEGIN CATCH
+		RETURN -1
+	END CATCH
+END
+' 
+END
+GO
+/****** Object:  StoredProcedure [dbo].[sp_Transfer_within]    Script Date: 07/10/2017 18:54:29 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[sp_Transfer_within]') AND type in (N'P', N'PC'))
+BEGIN
+EXEC dbo.sp_executesql @statement = N'-- =============================================
+-- Author:		<Author,,Name>
+-- Create date: <Create Date,,>
+-- Description:	<Description,,>
+-- =============================================
+CREATE PROCEDURE [dbo].[sp_Transfer_within]
+	-- Add the parameters for the stored procedure here
+		  
+         @ClientID AS BIGINT,
+         @AccountID1 as bigint,
+          @AccountID2 as bigint,
+          @Amount AS decimal(18,4)
+         ,@Return_Value as varchar(max) output
+AS
+BEGIN
+	-- SET NOCOUNT ON added to prevent extra result sets from
+	-- interfering with SELECT statements.
+	SET NOCOUNT ON;
+
+	IF NOT EXISTS (SELECT TOP 1 * FROM Account WHERE ID = @AccountID1
+	AND AvailableBalance >= @Amount)
+	BEGIN
+	-- BALANCE NOT AVAILABLE
+	set @Return_Value = ''Balance not available''
+			
+	END
+	ELSE 
+		
+	BEGIN
+	
+		DECLARE @Limit as bigint
+		Declare @TransactionCount as bigint
+		Declare @MaxTransaction as bigint
+		
+		Select @Limit = Limit from Client_Account
+		where Client_ID = @ClientID
+		and Account_ID = @AccountID1
+		
+		SELECT @TransactionCount = count(t.id)  from [Transaction] t
+		INNER JOIN [Account_Transaction] at on t.ID=at.Transaction_ID
+		WHERE Account_ID = @AccountID1 AND t.[Status]=''Approved'' and month(TransactionDate)=MONTH(getdate())
+
+	
+		Select @MaxTransaction = MaxTransactions  from Client_Account where Client_ID = @ClientID 
+		AND Account_ID = @AccountID1
+				
+		if(@Amount > @Limit) 
+		BEGIN
+	
+			set @Return_Value = ''Amount entered exceeds the allowed limit for the account.''
+		END	
+		else if(@TransactionCount >= @MaxTransaction)
+			
+		begin
+			set @Return_Value = ''You have already reached the maximum allowed transaction for a month.''
+		end	
+		else
+		begin
+		--PERFORM TRANSACTION
+		INSERT INTO [Transaction] ([Type], TransactionType, [TransactionFee], [Amount], TransactionDate, ApprovedDate, [Status])
+		VALUES(''Transfer'',0, 0, @Amount, GETDATE(), GETDATE(), ''Approved'')
+		
+		DECLARE @TR_ID AS BIGINT
+		set @TR_ID = @@IDENTITY
+		
+		INSERT INTO Account_Transaction(Account_ID,Transaction_ID, ToAccount_ID, [Type])
+		values(@AccountID1, @TR_ID, @AccountID2, ''Account'')
+		
+		INSERT INTO Client_Transaction(Client_ID,Transaction_ID)
+		values(@ClientID,@TR_ID)
+		
+		--INSERT INTO [Transaction] ([Type], TransactionType, [TransactionFee], [Amount], TransactionDate, ApprovedDate, [Status])
+		--VALUES(''Transfer'', 1,0, @Amount, GETDATE(), GETDATE(), 1)
+		
+		--DECLARE @TR_ID AS BIGINT
+		--set @TR_ID = @@IDENTITY
+		
+		--INSERT INTO Account_Transaction(Account_ID,Transaction_ID)
+		--values(@AccountID2, @TR_ID)
+		
+		--INSERT INTO Client_Transaction(Client_ID,Transaction_ID)
+		--values(@ClientID,@TR_ID)
+		
+		DECLARE @Account_Bal as decimal(18,4)
+		select @Account_Bal = AvailableBalance from Account 
+		where ID = @AccountID1
+		
+		update Account set AvailableBalance = (@Account_Bal - @Amount)
+		where ID = @AccountID1
+				
+		select @Account_Bal = AvailableBalance from Account 
+		where ID = @AccountID2
+		
+		update Account set AvailableBalance = (@Account_Bal + @Amount)
+		where ID = @AccountID2
+			
+		set @Return_Value = ''Transfer''
+		
+		END
+	END
+	
+	
+	
+END
+' 
+END
+GO
+/****** Object:  StoredProcedure [dbo].[sp_Transfer_ToOther]    Script Date: 07/10/2017 18:54:29 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[sp_Transfer_ToOther]') AND type in (N'P', N'PC'))
+BEGIN
+EXEC dbo.sp_executesql @statement = N'-- =============================================
+-- Author:		<Author,,Name>
+-- Create date: <Create Date,,>
+-- Description:	<Description,,>
+-- =============================================
+CREATE PROCEDURE [dbo].[sp_Transfer_ToOther]
+	-- Add the parameters for the stored procedure here
+         @ClientID AS BIGINT,
+         @AccountID as bigint,
+         @AccountNumber as bigint,
+         @LastName as varchar(MAX),
+         @Amount AS decimal(18,4)
+         ,@Return_Value as varchar(max) output
+AS
+BEGIN
+	-- SET NOCOUNT ON added to prevent extra result sets from
+	-- interfering with SELECT statements.
+	SET NOCOUNT ON;
+
+	IF NOT EXISTS (SELECT TOP 1 * FROM Account WHERE ID = @AccountID
+	AND AvailableBalance >= @Amount)
+	BEGIN
+	-- BALANCE NOT AVAILABLE
+	set @Return_Value = ''Balance not available''
+			
+	END
+	ELSE 
+		
+	BEGIN
+	
+		DECLARE @Limit as bigint
+		Declare @TransactionCount as bigint
+		Declare @MaxTransaction as bigint
+		
+		Select @Limit = Limit from Client_Account
+		where Client_ID = @ClientID
+		and Account_ID = @AccountID
+		
+		SELECT @TransactionCount = count(t.id)  from [Transaction] t
+		INNER JOIN [Account_Transaction] at on t.ID=at.Transaction_ID
+		WHERE Account_ID = @AccountID AND t.[Status]=''Approved'' and month(TransactionDate)=MONTH(getdate())
+
+	
+		Select @MaxTransaction = MaxTransactions  from Client_Account where Client_ID = @ClientID 
+		AND Account_ID = @AccountID
+				
+		if(@Amount > @Limit) 
+		BEGIN
+	
+			set @Return_Value = ''Amount entered exceeds the allowed limit for the account.''
+		END	
+		else if(@TransactionCount >= @MaxTransaction)
+			
+		begin
+			set @Return_Value = ''You have already reached the maximum allowed transaction for a month.''
+		end	
+		else if NOT Exists(Select * from Client C inner join Client_Account  CA on CA.Client_ID = C.ID
+							inner join Account A on CA.Account_ID = A.ID
+							where A.AccountNumber = @AccountNumber
+							and C.LastName = @LastName)
+		begin
+			set @Return_Value = ''Other person account number and last name does not match.''
+		end
+		else
+		begin
+		--PERFORM TRANSACTION
+		INSERT INTO [Transaction] ([Type], TransactionType, [TransactionFee], [Amount], TransactionDate, ApprovedDate, [Status])
+		VALUES(''Transfer'',0, 0, @Amount, GETDATE(), GETDATE(), ''Approved'')
+		
+		DECLARE @TR_ID AS BIGINT
+		set @TR_ID = @@IDENTITY
+		
+		Declare @AccountID2 bigint
+		select @AccountID2 = ID from Account where AccountNumber = @AccountNumber
+		
+		INSERT INTO Account_Transaction(Account_ID,Transaction_ID, ToAccount_ID, [Type])
+		values(@AccountID, @TR_ID, @AccountID2, ''Account'')
+		
+		INSERT INTO Client_Transaction(Client_ID,Transaction_ID)
+		values(@ClientID,@TR_ID)
+		
+		
+		
+		DECLARE @Account_Bal as decimal(18,4)
+		select @Account_Bal = AvailableBalance from Account 
+		where ID = @AccountID
+		
+		update Account set AvailableBalance = (@Account_Bal - @Amount)
+		where ID = @AccountID
+				
+		select @Account_Bal = AvailableBalance from Account 
+		where ID = @AccountID2
+		
+		update Account set AvailableBalance = (@Account_Bal + @Amount)
+		where ID = @AccountID2
+			
+		set @Return_Value = ''Transfer''
+		
+		END
+	END
+	
+	
+	
+END
+' 
+END
+GO
+/****** Object:  StoredProcedure [dbo].[sp_Validating_SecurityAnswer]    Script Date: 07/10/2017 18:54:29 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[sp_Validating_SecurityAnswer]') AND type in (N'P', N'PC'))
+BEGIN
+EXEC dbo.sp_executesql @statement = N'-- =============================================
+-- Author:		<Author,,Name>
+-- Create date: <Create Date,,>
+-- Description:	<Description,,>
+-- =============================================
+CREATE PROCEDURE [dbo].[sp_Validating_SecurityAnswer]
+	-- Add the parameters for the stored procedure here
+	@ClientID AS BIGINT,
+	@SecurityQuestionID as bigint,
+	@SecurityAnswer as varchar(MAX)
+AS
+BEGIN
+	-- SET NOCOUNT ON added to prevent extra result sets from
+	-- interfering with SELECT statements.
+	SET NOCOUNT ON;
+
+	IF EXISTS(SELECT TOP 1 * FROM Client_SecurityQuestion CSQ
+	INNER JOIN SecurityQuestion SQ 
+	ON SQ.ID = CSQ.Question_ID
+	WHERE CSQ.Answer = @SecurityAnswer
+	AND CSQ.Question_ID = @SecurityQuestionID
+	AND CSQ.Client_ID = @ClientID)
+	BEGIN
+	SELECT 1
+	END
+	ELSE
+	BEGIN
+	SELECT -1
+	END
+		
+	
+END
+' 
+END
+GO
+/****** Object:  StoredProcedure [dbo].[sp_RechargeMoney]    Script Date: 07/10/2017 18:54:29 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[sp_RechargeMoney]') AND type in (N'P', N'PC'))
+BEGIN
+EXEC dbo.sp_executesql @statement = N'-- =============================================
+-- Author:		<Author,,Name>
+-- Create date: <Create Date,,>
+-- Description:	<Description,,>
+-- =============================================
+CREATE PROCEDURE [dbo].[sp_RechargeMoney]
+	-- Add the parameters for the stored procedure here
+		  
+         @ClientID AS BIGINT,
+         @AccountID as bigint,
+          @MoneyCardID as bigint,
+          @Amount AS decimal(18,4)
+     
+           ,@Return_Value as varchar(max) output
+AS
+BEGIN
+	-- SET NOCOUNT ON added to prevent extra result sets from
+	-- interfering with SELECT statements.
+	SET NOCOUNT ON;
+
+	IF NOT EXISTS (SELECT TOP 1 * FROM Account WHERE ID = @AccountID
+	AND AvailableBalance >= @Amount)
+	BEGIN
+			set @Return_Value = ''Balance not available''
+	END
+	
+	ELSE 
+		
+	BEGIN
+		-- BALANCE NOT AVAILABLE
+		DECLARE @Limit as bigint
+		Declare @TransactionCount as bigint
+		Declare @MaxTransaction as bigint
+		
+		Select @Limit = Limit from Client_Account
+		where Client_ID = @ClientID
+		and Account_ID = @AccountID
+		
+		SELECT @TransactionCount = count(t.id)  from [Transaction] t
+		INNER JOIN [Account_Transaction] at on t.ID=at.Transaction_ID
+		WHERE Account_ID = @AccountID AND t.Status=''Approved'' and month(TransactionDate)=MONTH(getdate())
+--GROUP by MONTH(transactionDate)
+	
+		Select @MaxTransaction = MaxTransactions  from Client_Account where Client_ID = @ClientID 
+		AND Account_ID = @AccountID
+				
+		if(@Amount > @Limit)
+		BEGIN
+			set @Return_Value = ''Amount entered exceeds the allowed limit for the account.''
+		END	
+		else if(@TransactionCount >= @MaxTransaction)
+			
+		begin
+			set @Return_Value = ''You have already reached the maximum allowed transaction for a month.''
+		end	
+		else
+		begin
+		
+		--PERFORM TRANSACTION
+		INSERT INTO [Transaction] ([Type], TransactionType, [TransactionFee], [Amount], TransactionDate, ApprovedDate, [Status])
+		VALUES(''Withdraw'', 0 , 0, @Amount, GETDATE(), GETDATE(), ''Approved'')
+		
+		DECLARE @TR_ID AS DECIMAL(18,4)
+		set @TR_ID = @@IDENTITY
+		
+		INSERT INTO Account_Transaction(Account_ID,Transaction_ID, ToAccount_ID, [Type])
+		values(@AccountID, @TR_ID, @MoneyCardID, ''MoneyCard'')
+		
+		INSERT INTO Client_Transaction(Client_ID,Transaction_ID)
+		values(@ClientID,@TR_ID)
+		
+		--update Money Card and Account Values
+		DECLARE @MoneyCard_Bal as decimal(18,4)
+		
+		SELECT @MoneyCard_Bal = Balance FROM Moneycard 
+		WHERE ID = @MoneyCardID
+			
+		UPDATE Moneycard SET Balance = (@MoneyCard_Bal + @Amount) 
+		where ID = @MoneyCardID
+		
+		DECLARE @Account_Bal as decimal(18,4)
+		select @Account_Bal = AvailableBalance from Account 
+		where ID = @AccountID
+		
+		update Account set AvailableBalance = (@Account_Bal - @Amount)
+		where ID = @AccountID
+				
+				
+		set @Return_Value = ''Withdraw''
+		end
+	END
+	
+	
+	
+END
+' 
+END
+GO
+/****** Object:  StoredProcedure [dbo].[sp_PrintReceipt]    Script Date: 07/10/2017 18:54:29 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[sp_PrintReceipt]') AND type in (N'P', N'PC'))
+BEGIN
+EXEC dbo.sp_executesql @statement = N'-- =============================================
+-- Author:		<Author,,Name>
+-- Create date: <Create Date,,>
+-- Description:	<Description,,>
+-- =============================================
+CREATE PROCEDURE [dbo].[sp_PrintReceipt]
+	@TransactionID BIGINT
+AS
+BEGIN
+	-- SET NOCOUNT ON added to prevent extra result sets from
+	-- interfering with SELECT statements.
+	SET NOCOUNT ON;
+
+    -- Insert statements for procedure here
+    BEGIN TRY       
+		
+		DECLARE @Transaction_Activity TABLE
+		(
+		  TransactionDate datetime,
+		  Amount decimal(18,4),
+		  [Type] varchar(MAX),[Transaction Type] varchar(MAX),
+		  ManagerNotes varchar(MAX)
+		)
+		Declare @GetTransactionType varchar(10)
+		
+		select @GetTransactionType = [Type] from [Transaction] 
+		where ID = @TransactionID
+		
+		
+		if (@GetTransactionType = ''Pay Bill'')
+		begin
+			Select 
+			''Pay Bill'' as [Transaction Type],
+			A.AccountNumber, P.PayeeNamee AS [Paid To], P.PayeeIdentifier as [Payee Account Number], ''$'' + Convert(Varchar(50),T.Amount) as [Amount],T.TransactionDate as [Transaction Date], t.TransactionDescription  as [Transaction Description]   from [Transaction] T
+			inner join Account_Transaction AT
+			on T.ID = AT.Transaction_ID 
+			inner join Payee P
+			on p.ID = AT.ToAccount_ID
+			inner join Account A
+			on AT.Account_ID = A.ID
+			inner join Client_Account CA
+			on CA.Account_ID = A.ID 
+			inner join Client C
+			On C.ID = CA.Client_ID  
+			where T.ID = @TransactionID
+		end
+		ELSE IF (@GetTransactionType = ''Withdraw'')
+		BEGIN
+			Select 
+			''Withdraw'' as [Transaction Type],
+			A.AccountNumber, M.CardNumber as [Money Card Number], ''$'' + Convert(Varchar(50),T.Amount) as [Amount],T.TransactionDate as [Transaction Date], t.TransactionDescription as [Transaction Description]    from [Transaction] T
+			inner join Account_Transaction AT
+			on T.ID = AT.Transaction_ID 
+			inner join Moneycard M
+			on M.ID = At.ToAccount_ID
+			inner join Account A
+			on AT.Account_ID = A.ID
+			inner join Client_Account CA
+			on CA.Account_ID = A.ID 
+			inner join Client C
+			On C.ID = CA.Client_ID  
+			where T.ID = @TransactionID
+		End
+		ELSE IF (@GetTransactionType = ''Transfer'')
+		BEGIN
+			if( exists(Select A1.AccountNumber AS [From Account], A2.AccountNumber AS [To Account], ''$'' + Convert(Varchar(50),T.Amount) as [Amount],
+			T.TransactionDate as [Transaction Date], 
+			T.TransactionDescription as [Transaction Description]    from [Transaction] T
+			inner join Account_Transaction AT
+			on T.ID = AT.Transaction_ID 
+			inner join Account A1
+			on AT.Account_ID = A1.ID
+			inner join Account A2
+			on AT.ToAccount_ID = A2.ID
+			inner join Client_Account CA1
+			on CA1.Account_ID = A1.ID 
+			inner join Client_Account CA2
+			on CA2.Account_ID = A2.ID
+			inner join Client C1
+			On C1.ID = CA1.Client_ID 
+			inner join Client C2
+			On C2.ID = CA2.Client_ID 
+			where T.ID = @TransactionID
+			and C1.ID = C2.ID))
+			begin
+				Select 
+				''Transfer'' as [Transaction Type],
+				A1.AccountNumber AS [From Account], A2.AccountNumber AS [To Account], ''$'' + Convert(Varchar(50),T.Amount) as [Amount],
+				T.TransactionDate as [Transaction Date], 
+				T.TransactionDescription as [Transaction Description]    from [Transaction] T
+				inner join Account_Transaction AT
+				on T.ID = AT.Transaction_ID 
+				inner join Account A1
+				on AT.Account_ID = A1.ID
+				inner join Account A2
+				on AT.ToAccount_ID = A2.ID
+				inner join Client_Account CA1
+				on CA1.Account_ID = A1.ID 
+				inner join Client_Account CA2
+				on CA2.Account_ID = A2.ID
+				inner join Client C1
+				On C1.ID = CA1.Client_ID 
+				inner join Client C2
+				On C2.ID = CA2.Client_ID 
+				where T.ID = @TransactionID
+				and C1.ID = C2.ID
+			
+			end
+			else
+			
+			begin
+				Select 
+				''Transfer'' as [Transaction Type],
+				A1.AccountNumber AS [From Account], 
+				C2.FirstName + '' '' + C2.LastName as [Transfered to],  A2.AccountNumber AS [To Account], 
+				''$'' + Convert(Varchar(50),T.Amount) as [Amount],
+					T.TransactionDate as [Transaction Date], 
+					T.TransactionDescription as [Transaction Description]    from [Transaction] T
+					inner join Account_Transaction AT
+					on T.ID = AT.Transaction_ID 
+					inner join Account A1
+					on AT.Account_ID = A1.ID
+					inner join Account A2
+					on AT.ToAccount_ID = A2.ID
+					inner join Client_Account CA1
+					on CA1.Account_ID = A1.ID 
+					inner join Client_Account CA2
+					on CA2.Account_ID = A2.ID
+					inner join Client C1
+					On C1.ID = CA1.Client_ID 
+					inner join Client C2
+					On C2.ID = CA2.Client_ID 
+					where T.ID = @TransactionID
+					and C1.ID <> C2.ID
+			
+			end
+			
+			
+			
+		End
+		ELSE IF (@GetTransactionType = ''Deposit'')
+		BEGIN
+			Select 
+			AT.[Type] as [Deposit by],
+			A.AccountNumber as [Deposit To],
+						
+			''$'' + Convert(Varchar(50),T.Amount) as [Amount],
+			T.TransactionDate as [Transaction Date],
+			T.ManagerNotes as [Manager Notes] from [Transaction] T
+			inner join Account_Transaction AT
+			on T.ID = AT.Transaction_ID 
+			inner join Account A
+			on AT.Account_ID = A.ID
+			inner join Client_Account CA
+			on CA.Account_ID = A.ID 
+			inner join Client C
+			On C.ID = CA.Client_ID  
+			where T.ID = @TransactionID
+			
+		end
+		
+	End Try
+	BEGIN CATCH
+		
+	END CATCH
+	
+END
+' 
+END
+GO
+/****** Object:  StoredProcedure [dbo].[sp_PayBill]    Script Date: 07/10/2017 18:54:29 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[sp_PayBill]') AND type in (N'P', N'PC'))
+BEGIN
+EXEC dbo.sp_executesql @statement = N'-- =============================================
+-- Author:		<Author,,Name>
+-- Create date: <Create Date,,>
+-- Description:	<Description,,>
+-- =============================================
+CREATE PROCEDURE [dbo].[sp_PayBill]
+	-- Add the parameters for the stored procedure here
+		  
+         @ClientID AS BIGINT,
+         @AccountID as bigint,
+         @PayeeID as bigint,
+          @Amount AS decimal(18,4)
+     
+           ,@Return_Value as varchar(max) output
+AS
+BEGIN
+	-- SET NOCOUNT ON added to prevent extra result sets from
+	-- interfering with SELECT statements.
+	SET NOCOUNT ON;
+
+	IF NOT EXISTS (SELECT TOP 1 * FROM Account WHERE ID = @AccountID
+	AND AvailableBalance >= @Amount)
+	BEGIN
+			set @Return_Value = ''Balance not available''
+	END
+	
+	ELSE 
+		
+	BEGIN
+		-- BALANCE NOT AVAILABLE
+		DECLARE @Limit as decimal(18,4)
+		Declare @TransactionCount as bigint
+		Declare @MaxTransaction as bigint
+		
+		Select @Limit = Limit from Client_Account
+		where Client_ID = @ClientID
+		and Account_ID = @AccountID
+		
+		SELECT @TransactionCount = count(t.id)  from [Transaction] t
+		INNER JOIN [Account_Transaction] at on t.ID=at.Transaction_ID
+		WHERE Account_ID = @AccountID AND t.[Status] = ''Approved'' and month(TransactionDate)=MONTH(getdate())
+--GROUP by MONTH(transactionDate)
+	
+		Select @MaxTransaction = MaxTransactions  from Client_Account where Client_ID = @ClientID 
+		AND Account_ID = @AccountID
+				
+		if(@Amount > @Limit)
+		BEGIN
+			set @Return_Value = ''Amount entered exceeds the allowed limit for the account.''
+		END	
+		else if(@TransactionCount >= @MaxTransaction)
+			
+		begin
+			set @Return_Value = ''You have already reached the maximum allowed transaction for a month.''
+		end	
+		else
+		begin
+		
+		--PERFORM TRANSACTION
+		INSERT INTO [Transaction] ([Type], TransactionType, [TransactionFee], [Amount], TransactionDate, ApprovedDate, [Status])
+		VALUES(''Pay Bill'',0, 0, @Amount, GETDATE(), GETDATE(), ''Approved'')
+		
+		DECLARE @TR_ID AS BIGINT
+		set @TR_ID = @@IDENTITY
+		
+		INSERT INTO Account_Transaction(Account_ID,Transaction_ID, ToAccount_ID, [Type])
+		values(@AccountID, @TR_ID, @PayeeID, ''Pay Bill'')
+		
+		INSERT INTO Client_Transaction(Client_ID,Transaction_ID)
+		values(@ClientID,@TR_ID)
+		
+		----update Money Card and Account Values
+		--DECLARE @MoneyCard_Bal as BIGINT
+		
+		--SELECT @MoneyCard_Bal = Balance FROM Moneycard 
+		--WHERE ID = @MoneyCardID
+			
+		--UPDATE Moneycard SET Balance = (@MoneyCard_Bal + @Amount) 
+		--where ID = @MoneyCardID
+		
+		DECLARE @Account_Bal as decimal(18,4)
+		select @Account_Bal = AvailableBalance from Account 
+		where ID = @AccountID
+		
+		update Account set AvailableBalance = (@Account_Bal - @Amount)
+		where ID = @AccountID
+				
+				
+		set @Return_Value = ''Pay Bill''
+		end
+	END
+	
+	
+	
+END
+' 
+END
+GO
+/****** Object:  StoredProcedure [dbo].[sp_LoadSecurityQuestionAndAnswer]    Script Date: 07/10/2017 18:54:29 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[sp_LoadSecurityQuestionAndAnswer]') AND type in (N'P', N'PC'))
+BEGIN
+EXEC dbo.sp_executesql @statement = N'-- =============================================
+-- Author:		<Author,,Name>
+-- Create date: <Create Date,,>
+-- Description:	<Description,,>
+-- =============================================
+CREATE PROCEDURE [dbo].[sp_LoadSecurityQuestionAndAnswer]
+	-- Add the parameters for the stored procedure here
+	
+	@ClientID as bigint
+AS
+BEGIN
+	-- SET NOCOUNT ON added to prevent extra result sets from
+	-- interfering with SELECT statements.
+	SET NOCOUNT ON;
+
+    -- Insert statements for procedure here
+    BEGIN TRY       
+		SELECT SQ.ID as [ID], SQ.Question, CSQ.Answer
+		from SecurityQuestion SQ
+		inner join Client_SecurityQuestion CSQ
+		on SQ.ID = CSQ.Question_ID
+		inner join Client C
+		ON C.ID = CSQ.Client_ID
+		WHERE C.ID = @ClientID
+	End Try
+	BEGIN CATCH
+		
+	END CATCH
+	
+END
+' 
+END
+GO
+/****** Object:  StoredProcedure [dbo].[sp_LoadPayeesForClient]    Script Date: 07/10/2017 18:54:29 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[sp_LoadPayeesForClient]') AND type in (N'P', N'PC'))
+BEGIN
+EXEC dbo.sp_executesql @statement = N'-- =============================================
+-- Author:		<Author,,Name>
+-- Create date: <Create Date,,>
+-- Description:	<Description,,>
+-- =============================================
+CREATE PROCEDURE [dbo].[sp_LoadPayeesForClient]
+	@ClientID BIGINT
+AS
+BEGIN
+	-- SET NOCOUNT ON added to prevent extra result sets from
+	-- interfering with SELECT statements.
+	SET NOCOUNT ON;
+
+    -- Insert statements for procedure here
+    BEGIN TRY       
+		SELECT P.ID,Convert(varchar(max),P.[PayeeNamee]) + '' - '' + Convert(varchar(max),P.PayeeIdentifier) as Payee FROM Payee P
+		INNER JOIN Client_Payee CP
+		ON P.ID = CP.Payee_ID 
+		WHERE CP.Client_ID = @ClientID
+	End Try
+	BEGIN CATCH
+		
+	END CATCH
+	
+END
+' 
+END
+GO
+/****** Object:  StoredProcedure [dbo].[sp_LoadClientMoneyCard]    Script Date: 07/10/2017 18:54:29 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[sp_LoadClientMoneyCard]') AND type in (N'P', N'PC'))
+BEGIN
+EXEC dbo.sp_executesql @statement = N'-- =============================================
+-- Author:		<Author,,Name>
+-- Create date: <Create Date,,>
+-- Description:	<Description,,>
+-- =============================================
+CREATE PROCEDURE [dbo].[sp_LoadClientMoneyCard]
+	@ClientID BIGINT
+AS
+BEGIN
+	-- SET NOCOUNT ON added to prevent extra result sets from
+	-- interfering with SELECT statements.
+	SET NOCOUNT ON;
+
+    -- Insert statements for procedure here
+    BEGIN TRY       
+		SELECT ID, CONVERT(VARCHAR(MAX),CardNumber) + '' ($'' + CONVERT(VARCHAR(MAX), Balance) + '')'' AS [MoneyCard]   from Moneycard 
+		INNER JOIN Client_Moneycard CM
+		ON CM.Moneycard_ID = Moneycard.ID
+		Where CM.Client_ID = @ClientID
+	End Try
+	BEGIN CATCH
+		
+	END CATCH
+	
+END
+' 
+END
+GO
+/****** Object:  StoredProcedure [dbo].[sp_LoadClientAccount]    Script Date: 07/10/2017 18:54:29 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[sp_LoadClientAccount]') AND type in (N'P', N'PC'))
+BEGIN
+EXEC dbo.sp_executesql @statement = N'-- =============================================
+-- Author:		<Author,,Name>
+-- Create date: <Create Date,,>
+-- Description:	<Description,,>
+-- =============================================
+CREATE PROCEDURE [dbo].[sp_LoadClientAccount]
+	@ClientID BIGINT
+AS
+BEGIN
+	-- SET NOCOUNT ON added to prevent extra result sets from
+	-- interfering with SELECT statements.
+	SET NOCOUNT ON;
+
+    -- Insert statements for procedure here
+    BEGIN TRY       
+		SELECT ID, Convert(varchar(max),AccountNumber) + '' ($'' + CONVERT(VARCHAR(MAX), AvailableBalance) + '')''  AS [Account]  from Account 
+		INNER JOIN Client_Account CA
+		ON CA.Account_ID = Account.ID
+		Where CA.Client_ID = @ClientID
+	End Try
+	BEGIN CATCH
+		
+	END CATCH
+	
+END
+' 
+END
+GO
+/****** Object:  StoredProcedure [dbo].[sp_InsertClientSecurityQuestion]    Script Date: 07/10/2017 18:54:29 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[sp_InsertClientSecurityQuestion]') AND type in (N'P', N'PC'))
+BEGIN
+EXEC dbo.sp_executesql @statement = N'-- =============================================
+-- Author:		<Author,,Name>
+-- Create date: <Create Date,,>
+-- Description:	<Description,,>
+-- =============================================
+CREATE PROCEDURE [dbo].[sp_InsertClientSecurityQuestion]
+	-- Add the parameters for the stored procedure here
+	@Client_ID BIGINT,
+	@Question_ID BIGINT,
+	@Answer VARCHAR(MAX)
+AS
+BEGIN
+	-- SET NOCOUNT ON added to prevent extra result sets from
+	-- interfering with SELECT statements.
+	SET NOCOUNT ON;
+
+	BEGIN TRY
+	
+    -- Insert statements for procedure here
+	INSERT INTO [atmdb].[dbo].[Client_SecurityQuestion]
+           ([Client_ID]
+           ,[Question_ID]
+           ,[Answer])
+     VALUES
+           (@Client_ID
+           ,@Question_ID
+           ,@Answer)
+           
+           RETURN 1
+	END TRY
+	BEGIN CATCH
+		RETURN -1
+	END CATCH
+END
+' 
+END
+GO
+/****** Object:  StoredProcedure [dbo].[sp_GetSelectedPendingTransaction]    Script Date: 07/10/2017 18:54:29 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[sp_GetSelectedPendingTransaction]') AND type in (N'P', N'PC'))
+BEGIN
+EXEC dbo.sp_executesql @statement = N'-- =============================================
+-- Author:		<Author,,Name>
+-- Create date: <Create Date,,>
+-- Description:	<Description,,>
+-- =============================================
+CREATE PROCEDURE [dbo].[sp_GetSelectedPendingTransaction]
+	@TransactionID AS BIGINT
+AS
+BEGIN
+	-- SET NOCOUNT ON added to prevent extra result sets from
+	-- interfering with SELECT statements.
+	SET NOCOUNT ON;
+
+    -- Insert statements for procedure here
+    BEGIN TRY       
+		
+		select T.ID, Convert(decimal(18,2),T.Amount) as [Amount],T.ImagePath,
+		Convert(VARCHAR(8), T.TransactionDate, 1) as [TransactionDate],
+ 
+		--AT.ToAccount_ID, 
+		C.FirstName + '' '' + C.LastName as [Name], 
+		at.[Type],
+		T.TransactionDescription,
+		A.AccountNumber  from [Transaction] T
+		inner join Account_Transaction at
+		on t.ID = at.Transaction_ID
+		inner join Client_Account CA
+		on Ca.Account_ID = AT.ToAccount_ID
+		inner join Client C
+		on CA.Client_ID = C.ID
+		inner join Account A
+		on A.ID = AT.ToAccount_ID
+	
+		where T.[Status] = ''Pending''
+		AND t.ID = @TransactionID
+		order by T.TransactionDate asc	
+	
+	End Try
+	BEGIN CATCH
+		
+	END CATCH
+	
+END
+' 
+END
+GO
+/****** Object:  StoredProcedure [dbo].[sp_GetSelectedPendingApplicationAccounts]    Script Date: 07/10/2017 18:54:29 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[sp_GetSelectedPendingApplicationAccounts]') AND type in (N'P', N'PC'))
+BEGIN
+EXEC dbo.sp_executesql @statement = N'-- =============================================
+-- Author:		<Author,,Name>
+-- Create date: <Create Date,,>
+-- Description:	<Description,,>
+-- =============================================
+CREATE PROCEDURE [dbo].[sp_GetSelectedPendingApplicationAccounts]
+	@ClientID AS BIGINT
+AS
+BEGIN
+	-- SET NOCOUNT ON added to prevent extra result sets from
+	-- interfering with SELECT statements.
+	SET NOCOUNT ON;
+
+    -- Insert statements for procedure here
+    BEGIN TRY       
+		
+		--Select [ID],
+		--FirstName, 
+		--LastName,
+		--Sex,
+		--Email,
+		--DateOfBirth,
+		--Contactnumber
+		--[Address],
+		--PostalCode,
+		--Province
+		--[SIN]
+		--FROM Client
+		--where [Active] = ''Pending''		
+		--and ID = @ClientID
+		
+		select Client_ID, [Type] as [Accounts] from Client_Account CA
+		inner join Account A
+		on Ca.Account_ID = A.ID
+		where Client_ID = @ClientID
+		
+	End Try
+	BEGIN CATCH
+		
+	END CATCH
+	
+END
+' 
+END
+GO
+/****** Object:  StoredProcedure [dbo].[sp_GetSelectedPendingApplication]    Script Date: 07/10/2017 18:54:29 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[sp_GetSelectedPendingApplication]') AND type in (N'P', N'PC'))
+BEGIN
+EXEC dbo.sp_executesql @statement = N'-- =============================================
+-- Author:		<Author,,Name>
+-- Create date: <Create Date,,>
+-- Description:	<Description,,>
+-- =============================================
+CREATE PROCEDURE [dbo].[sp_GetSelectedPendingApplication]
+	@ClientID AS BIGINT
+AS
+BEGIN
+	-- SET NOCOUNT ON added to prevent extra result sets from
+	-- interfering with SELECT statements.
+	SET NOCOUNT ON;
+
+    -- Insert statements for procedure here
+    BEGIN TRY       
+		
+		Select 
+		--[ID],
+		FirstName, 
+		LastName,
+		Sex,
+		Email,
+		Convert(varchar(10), DateOfBirth,(103)) as [Date of Birth],
+		Contactnumber
+		[Address],
+		PostalCode,
+		Province
+		,
+		[SIN]
+		--case when [SIN] <> ''0'' then [SIN]
+		--else '''' end as [SIN]
+		FROM Client
+		where [Active] = ''Pending''		
+		and ID = @ClientID
+		
+		select [Type] as [Account] from Client_Account CA
+		inner join Account A
+		on Ca.Account_ID = A.ID
+		where Client_ID = @ClientID
+		
+	End Try
+	BEGIN CATCH
+		
+	END CATCH
+	
+END
+' 
+END
+GO
+/****** Object:  StoredProcedure [dbo].[sp_GetSelectedClient]    Script Date: 07/10/2017 18:54:29 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[sp_GetSelectedClient]') AND type in (N'P', N'PC'))
+BEGIN
+EXEC dbo.sp_executesql @statement = N'-- =============================================
+-- Author:		<Author,,Name>
+-- Create date: <Create Date,,>
+-- Description:	<Description,,>
+-- =============================================
+CREATE PROCEDURE [dbo].[sp_GetSelectedClient]
+	@ClientID AS BIGINT,
+	@TransactionID	AS BIGINT
+AS
+BEGIN
+	-- SET NOCOUNT ON added to prevent extra result sets from
+	-- interfering with SELECT statements.
+	SET NOCOUNT ON;
+
+    -- Insert statements for procedure here
+    BEGIN TRY       
+		
+		IF @ClientID > 0
+		BEGIN
+		
+			Select * from Client 
+			where ID = @ClientID
+		END
+		ELSE
+		BEGIN
+			SELECT * FROM Client C
+			inner join [Client_Transaction] CT
+			ON C.ID = CT.Client_ID
+			inner join [Transaction] T
+			ON T.ID = CT.Transaction_ID 
+			where T.ID = @TransactionID
+			
+			
+		END
+		
+	End Try
+	BEGIN CATCH
+		
+	END CATCH
+	
+END
+' 
+END
+GO
+/****** Object:  StoredProcedure [dbo].[sp_GetPendingTransactions]    Script Date: 07/10/2017 18:54:28 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[sp_GetPendingTransactions]') AND type in (N'P', N'PC'))
+BEGIN
+EXEC dbo.sp_executesql @statement = N'-- =============================================
+-- Author:		<Author,,Name>
+-- Create date: <Create Date,,>
+-- Description:	<Description,,>
+-- =============================================
+CREATE PROCEDURE [dbo].[sp_GetPendingTransactions]
+	
+AS
+BEGIN
+	-- SET NOCOUNT ON added to prevent extra result sets from
+	-- interfering with SELECT statements.
+	SET NOCOUNT ON;
+
+    -- Insert statements for procedure here
+    BEGIN TRY       
+		
+		select T.ID, T.Amount, T.TransactionDate, 
+		--AT.ToAccount_ID, 
+		C.FirstName + '' '' + C.LastName as [Name], 
+		at.[Type],
+		A.AccountNumber  from [Transaction] T
+		inner join Account_Transaction at
+		on t.ID = at.Transaction_ID
+		inner join Client_Account CA
+		on Ca.Account_ID = AT.ToAccount_ID
+		inner join Client C
+		on CA.Client_ID = C.ID
+		inner join Account A
+		on A.ID = AT.ToAccount_ID
+	
+		where T.[Status] = ''Pending''
+		order by T.TransactionDate asc	
+	
+	End Try
+	BEGIN CATCH
+		
+	END CATCH
+	
+END
+' 
+END
+GO
+/****** Object:  StoredProcedure [dbo].[sp_GetPayees]    Script Date: 07/10/2017 18:54:28 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[sp_GetPayees]') AND type in (N'P', N'PC'))
+BEGIN
+EXEC dbo.sp_executesql @statement = N'-- =============================================
+-- Author:		<Author,,Name>
+-- Create date: <Create Date,,>
+-- Description:	<Description,,>
+-- =============================================
+CREATE PROCEDURE [dbo].[sp_GetPayees]
+@ClientID AS BIGINT,
+@PayeeID bigint
+AS
+BEGIN
+	-- SET NOCOUNT ON added to prevent extra result sets from
+	-- interfering with SELECT statements.
+	SET NOCOUNT ON;
+
+    -- Insert statements for procedure here
+    BEGIN TRY     
+      
+	if(@PayeeID = 0)
+	begin	
+			SELECT P.ID, P.PayeeNamee as [PayeeName], P.PayeeIdentifier, P.DateAdded FROM Payee P
+			inner join Client_Payee CP
+			on CP.Payee_ID = P.ID 
+			inner join Client C
+			on C.ID = CP.Client_ID 
+			where C.ID = @ClientID
+	end
+	else
+	begin
+			SELECT P.ID, P.PayeeNamee as [PayeeName], P.PayeeIdentifier, P.PayeeNickname, P.DateAdded FROM Payee P
+			inner join Client_Payee CP
+			on CP.Payee_ID = P.ID 
+			inner join Client C
+			on C.ID = CP.Client_ID 
+			where C.ID = @ClientID
+			and P.ID = @PayeeID
+	end
+		
+	End Try
+	BEGIN CATCH
+		
+	END CATCH
+	
+END
+' 
+END
+GO
+/****** Object:  StoredProcedure [dbo].[sp_Deposit_Check]    Script Date: 07/10/2017 18:54:28 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[sp_Deposit_Check]') AND type in (N'P', N'PC'))
+BEGIN
+EXEC dbo.sp_executesql @statement = N'-- =============================================
+-- Author:		<Author,,Name>
+-- Create date: <Create Date,,>
+-- Description:	<Description,,>
+-- =============================================
+CREATE PROCEDURE [dbo].[sp_Deposit_Check]
+	-- Add the parameters for the stored procedure here
+		  
+         @ClientID AS BIGINT,
+         @Amount as decimal(18,4),
+         @Account as bigint,
+          @TransactionDescription AS Varchar(MAX),
+          @ImagePath as varchar(MAX)
+         --@Return_Value as varchar(max) output
+AS
+BEGIN
+	-- SET NOCOUNT ON added to prevent extra result sets from
+	-- interfering with SELECT statements.
+	SET NOCOUNT ON;
+
+	INSERT INTO [Transaction]
+	([Type], [TransactionType],TransactionFee, [Amount], TransactionDate, TransactionDescription, ImagePath, [Status])
+	VALUES(''Deposit'', 1, 0,@Amount,GETDATE(), @TransactionDescription, @ImagePath, ''Pending'')
+	
+	Declare @TransactionID as bigint
+	set @TransactionID = @@IDENTITY
+	
+	INSERT INTO Account_Transaction
+	(Account_ID, Transaction_ID,ToAccount_ID, [Type])
+	VALUES(@Account, @TransactionID, @Account, ''Check'')
+
+	INSERT INTO Client_Transaction 
+	(Client_ID, Transaction_ID)
+	values(@ClientID, @TransactionID)
+	
+END
+' 
+END
+GO
+/****** Object:  StoredProcedure [dbo].[sp_Deposit_Cash]    Script Date: 07/10/2017 18:54:28 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[sp_Deposit_Cash]') AND type in (N'P', N'PC'))
+BEGIN
+EXEC dbo.sp_executesql @statement = N'-- =============================================
+-- Author:		<Author,,Name>
+-- Create date: <Create Date,,>
+-- Description:	<Description,,>
+-- =============================================
+CREATE PROCEDURE [dbo].[sp_Deposit_Cash]
+	-- Add the parameters for the stored procedure here
+		  
+         @ClientID AS BIGINT,
+         @Amount as decimal(18,4),
+         @Account as bigint,
+         @TransactionDescription AS Varchar(MAX)
+          
+         --@Return_Value as varchar(max) output
+AS
+BEGIN
+	-- SET NOCOUNT ON added to prevent extra result sets from
+	-- interfering with SELECT statements.
+	SET NOCOUNT ON;
+
+	INSERT INTO [Transaction]
+	([Type], [TransactionType],TransactionFee, [Amount], TransactionDate, TransactionDescription,  [Status])
+	VALUES(''Deposit'', 1, 0,@Amount,GETDATE(), @TransactionDescription,  ''Pending'')
+	
+	Declare @TransactionID as bigint
+	set @TransactionID = @@IDENTITY
+	
+	INSERT INTO Account_Transaction
+	(Account_ID, Transaction_ID, ToAccount_ID,[Type])
+	VALUES(@Account, @TransactionID, @Account, ''Cash'')
+	
+	INSERT INTO Client_Transaction 
+	(Client_ID, Transaction_ID)
+	values(@ClientID, @TransactionID)
+	
+END
+' 
+END
+GO
+/****** Object:  StoredProcedure [dbo].[sp_DeletePayee]    Script Date: 07/10/2017 18:54:28 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[sp_DeletePayee]') AND type in (N'P', N'PC'))
+BEGIN
+EXEC dbo.sp_executesql @statement = N'-- =============================================
+-- Author:		<Author,,Name>
+-- Create date: <Create Date,,>
+-- Description:	<Description,,>
+-- =============================================
+CREATE PROCEDURE [dbo].[sp_DeletePayee]
+@ClientID as bigint,
+@Payeeid AS bigint,
+@Return_Value as bigint output
+AS
+BEGIN
+	-- SET NOCOUNT ON added to prevent extra result sets from
+	-- interfering with SELECT statements.
+	SET NOCOUNT ON;
+
+    -- Insert statements for procedure here
+    BEGIN TRY     
+      
+		IF exists(SELECT Account_ID FROM Account_Transaction WHERE [Type] = ''Pay Bill'' and ToAccount_ID = @Payeeid)
+		BEGIN
+			set @Return_Value = -1
+		END
+		ELSE
+		BEGIN
+		
+			delete from Client_Payee where Payee_ID = @Payeeid and Client_ID = @ClientID 
+			
+			delete from Payee where ID = @Payeeid
+			
+			set @Return_Value = 1
+		END
+	
+	End Try
+	BEGIN CATCH
+		
+	END CATCH
+	
+END
+' 
+END
+GO
+/****** Object:  StoredProcedure [dbo].[sp_ApprovePendingTransaction]    Script Date: 07/10/2017 18:54:28 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[sp_ApprovePendingTransaction]') AND type in (N'P', N'PC'))
+BEGIN
+EXEC dbo.sp_executesql @statement = N'-- =============================================
+-- Author:		<Author,,Name>
+-- Create date: <Create Date,,>
+-- Description:	<Description,,>
+-- =============================================
+CREATE PROCEDURE [dbo].[sp_ApprovePendingTransaction]
+	@TransactionID AS BIGINT,
+	--@Amount AS Bigint
+	@ManagerNotes as varchar(MAX),
+	@Decision as varchar(MAX),
+	@Return_Value AS BIGINT output
+	
+AS
+BEGIN
+	-- SET NOCOUNT ON added to prevent extra result sets from
+	-- interfering with SELECT statements.
+	SET NOCOUNT ON;
+
+    -- Insert statements for procedure here
+    BEGIN TRY       
+		
+		if(@Decision = ''Approve'')
+		begin
+		--approve
+			update [Transaction] set 
+			ManagerNotes = @ManagerNotes,
+			[Status] = ''Approved''
+			where [ID] = @TransactionID
+			
+			DECLARE @Account_ID as BIGINT
+			DECLARE @Account_Bal as decimal(18,4)
+			declare @Amount as decimal(18,4)
+			
+			Select  @Account_ID = A.ID,  @Account_Bal = A.AvailableBalance from Account A
+			inner join Account_Transaction AT
+			on AT.Account_ID = A.ID
+			where At.Transaction_ID = @TransactionID
+			
+			select @Amount = Amount  from [Transaction] where ID = @TransactionID
+		
+			update Account set AvailableBalance = (@Account_Bal + @Amount)
+			where ID = @Account_ID
+			
+		SET @Return_Value = 1
+		end
+		else
+		begin
+		--decline
+			update [Transaction] set 
+			ManagerNotes = @ManagerNotes,
+			[Status] = ''Declined''
+			where [ID] = @TransactionID
+			
+			SET @Return_Value = 2
+		end
+		
+	
+		
+	
+	End Try
+	BEGIN CATCH
+		SET @Return_Value = -101
+	END CATCH
+	
+END
+' 
+END
+GO
+/****** Object:  StoredProcedure [dbo].[sp_ApprovePendingCash]    Script Date: 07/10/2017 18:54:28 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[sp_ApprovePendingCash]') AND type in (N'P', N'PC'))
+BEGIN
+EXEC dbo.sp_executesql @statement = N'-- =============================================
+-- Author:		<Author,,Name>
+-- Create date: <Create Date,,>
+-- Description:	<Description,,>
+-- =============================================
+CREATE PROCEDURE [dbo].[sp_ApprovePendingCash]
+	@TransactionID AS BIGINT,
+	--@Amount AS Bigint
+	@ManagerNotes as varchar(MAX),
+	@Decision as varchar(MAX),
+	@Return_Value AS BIGINT
+	
+AS
+BEGIN
+	-- SET NOCOUNT ON added to prevent extra result sets from
+	-- interfering with SELECT statements.
+	SET NOCOUNT ON;
+
+    -- Insert statements for procedure here
+    BEGIN TRY       
+		
+		if(@Decision = ''Approved'')
+		begin
+		--approve
+			update [Transaction] set 
+			ManagerNotes = @ManagerNotes,
+			[Status] = @Decision
+			where [ID] = @TransactionID
+			
+			DECLARE @Account_ID as BIGINT
+			DECLARE @Account_Bal as BIGINT
+			declare @Amount as decimal(18,2)
+			
+			Select  @Account_ID = A.ID,  @Account_Bal = A.AvailableBalance from Account A
+			inner join Account_Transaction AT
+			on AT.Account_ID = A.ID
+			where At.Transaction_ID = @TransactionID
+			
+			select @Amount from [Transaction] where ID = @TransactionID
+		
+			update Account set AvailableBalance = (@Account_Bal + @Amount)
+			where ID = @Account_ID
+			
+		SET @Return_Value = 1
+		end
+		else
+		begin
+		--decline
+			update [Transaction] set 
+			ManagerNotes = @ManagerNotes,
+			[Status] = @Decision
+			where [ID] = @TransactionID
+			
+			SET @Return_Value = 2
+		end
+		
+	
+		
+	
+	End Try
+	BEGIN CATCH
+		SET @Return_Value = -1
+	END CATCH
+	
+END
+' 
+END
+GO
+/****** Object:  StoredProcedure [dbo].[sp_ApprovePendingApplication]    Script Date: 07/10/2017 18:54:28 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[sp_ApprovePendingApplication]') AND type in (N'P', N'PC'))
+BEGIN
+EXEC dbo.sp_executesql @statement = N'-- =============================================
+-- Author:		<Author,,Name>
+-- Create date: <Create Date,,>
+-- Description:	<Description,,>
+-- =============================================
+CREATE PROCEDURE [dbo].[sp_ApprovePendingApplication]
+	@ClientID AS BIGINT,
+	@ManagerNotes as varchar(MAX),
+	@Decision as varchar(MAX),
+	@Return_Value AS BIGINT output	
+AS
+BEGIN
+	-- SET NOCOUNT ON added to prevent extra result sets from
+	-- interfering with SELECT statements.
+	SET NOCOUNT ON;
+
+    -- Insert statements for procedure here
+    BEGIN TRY       
+		
+		if(@Decision = ''Approve'')
+		begin
+		--approve
+			update Client set [Active] = ''Approved''
+			where ID = @ClientID
+			
+			Declare @ClientAccountCount bigint
+			
+			select @ClientAccountCount = COUNT(*) from Client_Account
+			where Client_ID = @ClientID
+			
+			Declare @Maxnumber bigint
+			Declare @i bigint
+			set @i = 0
+			
+			while @i < @ClientAccountCount 
+			begin
+				
+				Select @Maxnumber = MAX(ISNULL(AccountNumber,0)) from Account 
+				
+				if @Maxnumber = 0
+				begin 
+					SET @Maxnumber = 8898334455667788
+				end
+				else
+				begin
+					SET @Maxnumber = @Maxnumber + 1
+				end
+				
+				Declare @AccountID bigint
+				
+				Select top 1 @AccountID = ID from Account A
+				inner join Client_Account CA
+				on Ca.Account_ID = A.ID
+				where A.AccountNumber is null
+				and Ca.Client_ID = @ClientID
+				
+				
+				Update Account 
+				set AccountNumber = @Maxnumber,
+				[Active] = 1
+				where ID = @AccountID
+				
+			
+				Set @i = @i + 1
+			end
+			
+				Select @Maxnumber = MAX(ISNULL(CardNumber,0)) from Moneycard 
+				if @Maxnumber = 0
+				begin 
+					SET @Maxnumber = 6598334455667788
+				end
+				else
+				begin
+					SET @Maxnumber = @Maxnumber + 1
+				end
+				
+				
+				
+				Update Moneycard
+				SET CardNumber = @Maxnumber 
+				where ID in (Select top 1 Moneycard_ID from Client_Moneycard where Client_ID = @ClientID )
+				
+				Select @Maxnumber = MAX(ISNULL(ClientCardNumber,0)) from Client 
+				if @Maxnumber = 0
+				begin 
+					SET @Maxnumber = 4521334455667788
+				end
+				else
+				begin
+					SET @Maxnumber = @Maxnumber + 1
+				end	
+				
+				update Client
+				set ClientCardNumber = @Maxnumber 
+				where ID = @ClientID
+			
+			
+			
+				-- Declare @j bigint
+				-- Declare @Payees bigint
+				-- Declare @PayeeID bigint
+				-- Declare @tempPayee table (ranks bigint, PayeeID bigint)
+				-- insert into @tempPayee
+				-- select rank() OVER (ORDER BY p.ID) as rank, p.ID
+				-- from Payee p
+				-- order by rank 
+				
+				--select @Payees = COUNT(ID) from Payee
+				--set @j = 1
+				
+				--while @j <= @Payees 
+				--begin
+				--		select @PayeeID = PayeeID from @tempPayee where ranks = @j
+				
+				--		insert into dbo.Client_Payee
+				--		(Payee_ID, Client_ID)
+				--		values(@PayeeID, @ClientID)
+						
+				--set @j = @j +1
+				--end
+ 
+
+		SET @Return_Value = 1
+		end
+		else
+		begin
+		--decline
+			update Client set [Active] = ''Declined''
+			where ID = @ClientID
+			
+			SET @Return_Value = 2
+		end
+		
+	
+		
+	
+	End Try
+	BEGIN CATCH
+		SET @Return_Value = -101
+	END CATCH
+	
+END
+' 
+END
+GO
+/****** Object:  StoredProcedure [dbo].[sp_ApprovePending]    Script Date: 07/10/2017 18:54:28 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[sp_ApprovePending]') AND type in (N'P', N'PC'))
+BEGIN
+EXEC dbo.sp_executesql @statement = N'-- =============================================
+-- Author:		<Author,,Name>
+-- Create date: <Create Date,,>
+-- Description:	<Description,,>
+-- =============================================
+CREATE PROCEDURE [dbo].[sp_ApprovePending]
+	@TransactionID AS BIGINT,
+	--@Amount AS Bigint
+	@ManagerNotes as varchar(MAX),
+	@Decision as varchar(MAX),
+	@Return_Value AS BIGINT
+	
+AS
+BEGIN
+	-- SET NOCOUNT ON added to prevent extra result sets from
+	-- interfering with SELECT statements.
+	SET NOCOUNT ON;
+
+    -- Insert statements for procedure here
+    BEGIN TRY       
+		
+		if(@Decision = ''Approved'')
+		begin
+		--approve
+			update [Transaction] set 
+			ManagerNotes = @ManagerNotes,
+			[Status] = @Decision
+			where [ID] = @TransactionID
+			
+			DECLARE @Account_ID as BIGINT
+			DECLARE @Account_Bal as BIGINT
+			declare @Amount as decimal(18,2)
+			
+			Select  @Account_ID = A.ID,  @Account_Bal = A.AvailableBalance from Account A
+			inner join Account_Transaction AT
+			on AT.Account_ID = A.ID
+			where At.Transaction_ID = @TransactionID
+			
+			select @Amount from [Transaction] where ID = @TransactionID
+		
+			update Account set AvailableBalance = (@Account_Bal + @Amount)
+			where ID = @Account_ID
+			
+		SET @Return_Value = 1
+		end
+		else
+		begin
+		--decline
+			update [Transaction] set 
+			ManagerNotes = @ManagerNotes,
+			[Status] = @Decision
+			where [ID] = @TransactionID
+			
+			SET @Return_Value = 2
+		end
+		
+	
+		
+	
+	End Try
+	BEGIN CATCH
+		SET @Return_Value = -1
+	END CATCH
+	
+END
+' 
+END
+GO
+/****** Object:  StoredProcedure [dbo].[sp_AddPayee]    Script Date: 07/10/2017 18:54:28 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[sp_AddPayee]') AND type in (N'P', N'PC'))
+BEGIN
+EXEC dbo.sp_executesql @statement = N'-- =============================================
+-- Author:		<Author,,Name>
+-- Create date: <Create Date,,>
+-- Description:	<Description,,>
+-- =============================================
+CREATE PROCEDURE [dbo].[sp_AddPayee]
+@ClientID as bigint,
+@PayeeName AS Varchar(MAX),
+@PayeeNickName AS Varchar(MAX),
+@AccountIdentifier AS Varchar(MAX),
+@Return_Value AS BIGINT OUTPUT
+AS
+BEGIN
+	-- SET NOCOUNT ON added to prevent extra result sets from
+	-- interfering with SELECT statements.
+	SET NOCOUNT ON;
+
+    -- Insert statements for procedure here
+    BEGIN TRY     
+      
+      IF(NOT EXISTS
+      (SELECT PayeeIdentifier FROM Payee WHERE PayeeIdentifier = @AccountIdentifier)
+      OR 
+      (NOT EXISTS(SELECT ID FROM Client WHERE ID = @ClientID)))
+      begin
+		INSERT INTO Payee 
+		(PayeeNamee, PayeeNickname, PayeeIdentifier)
+		values(@PayeeName,@PayeeNickName,@AccountIdentifier)
+		
+		insert into Client_Payee 
+		( Client_ID, Payee_ID)
+		values(@ClientID,@@IDENTITY)
+		
+		SET @Return_Value = 1
+	end
+	else
+	begin
+		SET @Return_Value = -1
+	
+	end
+	
+	End Try
+	BEGIN CATCH
+		
+	END CATCH
+	
+END
+' 
+END
+GO
+/****** Object:  StoredProcedure [dbo].[sp_AccountCreation]    Script Date: 07/10/2017 18:54:28 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[sp_AccountCreation]') AND type in (N'P', N'PC'))
+BEGIN
+EXEC dbo.sp_executesql @statement = N'-- =============================================
+-- Author:		<Author,,Name>
+-- Create date: <Create Date,,>
+-- Description:	<Description,,>
+-- =============================================
+CREATE PROCEDURE [dbo].[sp_AccountCreation]
+	-- Add the parameters for the stored procedure here
+		  
+        @ClientID as bigint,
+        @AccountType as varchar(max)
+AS
+BEGIN
+	-- SET NOCOUNT ON added to prevent extra result sets from
+	-- interfering with SELECT statements.
+	SET NOCOUNT ON;
+
+
+	
+    INSERT INTO [atmdb].[dbo].[Account]
+           ([AccountNumber]
+           ,[DateCreated]
+           ,[Type]
+           ,[TotalBalance]
+           ,[AvailableBalance]
+           ,[Fee]
+           ,[InterestRate]
+           ,[LastAccessed]
+           ,[Active])
+     VALUES
+           (NULL
+           ,GETDATE()
+           ,@AccountType
+           ,0
+           ,0
+           ,0
+           ,0
+           ,NULL
+           ,0)
+    
+    declare @accountID as bigint
+    set @accountID = @@IDENTITY 
+    
+    Select @clientID = MAX(ID) from Client
+		if(@AccountType = ''Junior'')
+		begin
+		
+    
+     insert into  Client_Account(Client_ID,Account_ID,Limit,MaxTransactions)
+     values(@ClientID, @accountID, 100, 15)      
+        end
+        else if(@AccountType = ''Checking'')
+        begin
+        insert into  Client_Account(Client_ID,Account_ID,Limit,MaxTransactions)
+     values(@ClientID, @accountID, 1000, 25)      
+        end
+        
+        else if(@AccountType = ''Savings'')
+        begin
+        insert into  Client_Account(Client_ID,Account_ID,Limit,MaxTransactions)
+     values(@ClientID, @accountID, 1000, 10)      
+        end
+       
+      IF NOT EXISTS (SELECT Client_ID FROM Client_Moneycard WHERE Client_ID = @ClientID) 
+      BEGIN
+			 Insert into Moneycard
+			 (CardNumber, Balance, DateIssued)  
+			 VALUES(null,0, GETDATE())
+		     
+			 DECLARE @MoneyCardID bigint
+			 set @MoneyCardID = @@IDENTITY
+		     
+			 insert into Client_Moneycard
+			 (Client_ID, Moneycard_ID)
+			 Values(@ClientID, @MoneyCardID)     
+    END
+END
+' 
+END
+GO
+/****** Object:  StoredProcedure [dbo].[sp_AccountActivity]    Script Date: 07/10/2017 18:54:28 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[sp_AccountActivity]') AND type in (N'P', N'PC'))
+BEGIN
+EXEC dbo.sp_executesql @statement = N'-- =============================================
+-- Author:		<Author,,Name>
+-- Create date: <Create Date,,>
+-- Description:	<Description,,>
+-- =============================================
+CREATE PROCEDURE [dbo].[sp_AccountActivity]
+	@ClientID BIGINT,
+	@AccountID BIGINT,
+	@FromDate date,
+	@ToDate date
+AS
+BEGIN
+	-- SET NOCOUNT ON added to prevent extra result sets from
+	-- interfering with SELECT statements.
+	SET NOCOUNT ON;
+
+    -- Insert statements for procedure here
+    BEGIN TRY       
+		
+		DECLARE @Transaction_Activity TABLE
+		(TID bigint,
+		  TransactionDate datetime,
+		  Amount decimal(18,2),
+		  [Type] varchar(MAX),[Transaction Type] varchar(MAX),
+		  ManagerNotes varchar(MAX)
+)
+		
+		insert into @Transaction_Activity
+		SELECT T.ID, T.TransactionDate as [Transaction Date],T.Amount, T.[Type], 
+		Case TransactionType when 0 then ''Debit'' else ''Credit'' end
+         as [Transaction Type]
+         ,
+		T.ManagerNotes as [Manager Notes] FROM [Transaction] T
+		INNER JOIN Account_Transaction AT
+		ON T.ID = AT.Transaction_ID
+		WHERE T.[Status] = ''Approved''
+		AND AT.Account_ID = @AccountID
+		--and TransactionType = 1
+		ORDER BY t.TransactionDate DESC
+		
+		
+		insert into @Transaction_Activity
+		SELECT T.ID, T.TransactionDate as [Transaction Date],T.Amount, T.[Type], 
+		''Credit'' as [Transaction Type]
+         ,
+		T.ManagerNotes as [Manager Notes] from Account_Transaction AT
+		inner join [Transaction] T
+		on T.ID = AT.Transaction_ID
+		WHERE 
+		T.[Status] = ''Approved''
+		AND 
+		AT.ToAccount_ID = @AccountID
+		and At.[Type] = ''Account''
+		--and TransactionType = 1
+		ORDER BY t.TransactionDate DESC
+
+
+		select TID, TransactionDate,
+		  Amount,
+		  [Type],[Transaction Type] from @Transaction_Activity
+		where TransactionDate between @FromDate AND @ToDate
+		order by TransactionDate desc
+		
+	End Try
+	BEGIN CATCH
+		Declare @client_Name as varchar(MAX)
+		select @client_Name = FirstName + '' '' + LastName from Client where ID= @ClientID
+		Insert into Error_Log 
+		(ErrorMessage,UserType,UserName,Operation,LogDate)
+		values(ERROR_MESSAGE(), ''Client'',@client_Name, ''Account Activity'', GETDATE() )
+	END CATCH
+	
+END
+' 
+END
+GO
+/****** Object:  ForeignKey [FK_Account_Manager_Account]    Script Date: 07/10/2017 18:54:21 ******/
+IF NOT EXISTS (SELECT * FROM sys.foreign_keys WHERE object_id = OBJECT_ID(N'[dbo].[FK_Account_Manager_Account]') AND parent_object_id = OBJECT_ID(N'[dbo].[Account_Manager]'))
+ALTER TABLE [dbo].[Account_Manager]  WITH CHECK ADD  CONSTRAINT [FK_Account_Manager_Account] FOREIGN KEY([Account_ID])
+REFERENCES [dbo].[Account] ([ID])
+GO
+IF  EXISTS (SELECT * FROM sys.foreign_keys WHERE object_id = OBJECT_ID(N'[dbo].[FK_Account_Manager_Account]') AND parent_object_id = OBJECT_ID(N'[dbo].[Account_Manager]'))
+ALTER TABLE [dbo].[Account_Manager] CHECK CONSTRAINT [FK_Account_Manager_Account]
+GO
+/****** Object:  ForeignKey [FK_Account_Manager_Manager]    Script Date: 07/10/2017 18:54:21 ******/
+IF NOT EXISTS (SELECT * FROM sys.foreign_keys WHERE object_id = OBJECT_ID(N'[dbo].[FK_Account_Manager_Manager]') AND parent_object_id = OBJECT_ID(N'[dbo].[Account_Manager]'))
+ALTER TABLE [dbo].[Account_Manager]  WITH CHECK ADD  CONSTRAINT [FK_Account_Manager_Manager] FOREIGN KEY([Manager_ID])
+REFERENCES [dbo].[Manager] ([ID])
+GO
+IF  EXISTS (SELECT * FROM sys.foreign_keys WHERE object_id = OBJECT_ID(N'[dbo].[FK_Account_Manager_Manager]') AND parent_object_id = OBJECT_ID(N'[dbo].[Account_Manager]'))
+ALTER TABLE [dbo].[Account_Manager] CHECK CONSTRAINT [FK_Account_Manager_Manager]
+GO
+/****** Object:  ForeignKey [FK_Account_Transaction_Account]    Script Date: 07/10/2017 18:54:21 ******/
+IF NOT EXISTS (SELECT * FROM sys.foreign_keys WHERE object_id = OBJECT_ID(N'[dbo].[FK_Account_Transaction_Account]') AND parent_object_id = OBJECT_ID(N'[dbo].[Account_Transaction]'))
+ALTER TABLE [dbo].[Account_Transaction]  WITH CHECK ADD  CONSTRAINT [FK_Account_Transaction_Account] FOREIGN KEY([Account_ID])
+REFERENCES [dbo].[Account] ([ID])
+GO
+IF  EXISTS (SELECT * FROM sys.foreign_keys WHERE object_id = OBJECT_ID(N'[dbo].[FK_Account_Transaction_Account]') AND parent_object_id = OBJECT_ID(N'[dbo].[Account_Transaction]'))
+ALTER TABLE [dbo].[Account_Transaction] CHECK CONSTRAINT [FK_Account_Transaction_Account]
+GO
+/****** Object:  ForeignKey [FK_Account_Transaction_Transaction]    Script Date: 07/10/2017 18:54:21 ******/
+IF NOT EXISTS (SELECT * FROM sys.foreign_keys WHERE object_id = OBJECT_ID(N'[dbo].[FK_Account_Transaction_Transaction]') AND parent_object_id = OBJECT_ID(N'[dbo].[Account_Transaction]'))
+ALTER TABLE [dbo].[Account_Transaction]  WITH CHECK ADD  CONSTRAINT [FK_Account_Transaction_Transaction] FOREIGN KEY([Transaction_ID])
+REFERENCES [dbo].[Transaction] ([ID])
+GO
+IF  EXISTS (SELECT * FROM sys.foreign_keys WHERE object_id = OBJECT_ID(N'[dbo].[FK_Account_Transaction_Transaction]') AND parent_object_id = OBJECT_ID(N'[dbo].[Account_Transaction]'))
+ALTER TABLE [dbo].[Account_Transaction] CHECK CONSTRAINT [FK_Account_Transaction_Transaction]
+GO
+/****** Object:  ForeignKey [FK_Client_Account_Account]    Script Date: 07/10/2017 18:54:21 ******/
+IF NOT EXISTS (SELECT * FROM sys.foreign_keys WHERE object_id = OBJECT_ID(N'[dbo].[FK_Client_Account_Account]') AND parent_object_id = OBJECT_ID(N'[dbo].[Client_Account]'))
+ALTER TABLE [dbo].[Client_Account]  WITH CHECK ADD  CONSTRAINT [FK_Client_Account_Account] FOREIGN KEY([Account_ID])
+REFERENCES [dbo].[Account] ([ID])
+GO
+IF  EXISTS (SELECT * FROM sys.foreign_keys WHERE object_id = OBJECT_ID(N'[dbo].[FK_Client_Account_Account]') AND parent_object_id = OBJECT_ID(N'[dbo].[Client_Account]'))
+ALTER TABLE [dbo].[Client_Account] CHECK CONSTRAINT [FK_Client_Account_Account]
+GO
+/****** Object:  ForeignKey [FK_Client_Account_Client]    Script Date: 07/10/2017 18:54:21 ******/
+IF NOT EXISTS (SELECT * FROM sys.foreign_keys WHERE object_id = OBJECT_ID(N'[dbo].[FK_Client_Account_Client]') AND parent_object_id = OBJECT_ID(N'[dbo].[Client_Account]'))
+ALTER TABLE [dbo].[Client_Account]  WITH CHECK ADD  CONSTRAINT [FK_Client_Account_Client] FOREIGN KEY([Client_ID])
+REFERENCES [dbo].[Client] ([ID])
+GO
+IF  EXISTS (SELECT * FROM sys.foreign_keys WHERE object_id = OBJECT_ID(N'[dbo].[FK_Client_Account_Client]') AND parent_object_id = OBJECT_ID(N'[dbo].[Client_Account]'))
+ALTER TABLE [dbo].[Client_Account] CHECK CONSTRAINT [FK_Client_Account_Client]
+GO
+/****** Object:  ForeignKey [FK_Client_Moneycard_Client]    Script Date: 07/10/2017 18:54:22 ******/
+IF NOT EXISTS (SELECT * FROM sys.foreign_keys WHERE object_id = OBJECT_ID(N'[dbo].[FK_Client_Moneycard_Client]') AND parent_object_id = OBJECT_ID(N'[dbo].[Client_Moneycard]'))
+ALTER TABLE [dbo].[Client_Moneycard]  WITH CHECK ADD  CONSTRAINT [FK_Client_Moneycard_Client] FOREIGN KEY([Client_ID])
+REFERENCES [dbo].[Client] ([ID])
+GO
+IF  EXISTS (SELECT * FROM sys.foreign_keys WHERE object_id = OBJECT_ID(N'[dbo].[FK_Client_Moneycard_Client]') AND parent_object_id = OBJECT_ID(N'[dbo].[Client_Moneycard]'))
+ALTER TABLE [dbo].[Client_Moneycard] CHECK CONSTRAINT [FK_Client_Moneycard_Client]
+GO
+/****** Object:  ForeignKey [FK_Client_Moneycard_Moneycard]    Script Date: 07/10/2017 18:54:22 ******/
+IF NOT EXISTS (SELECT * FROM sys.foreign_keys WHERE object_id = OBJECT_ID(N'[dbo].[FK_Client_Moneycard_Moneycard]') AND parent_object_id = OBJECT_ID(N'[dbo].[Client_Moneycard]'))
+ALTER TABLE [dbo].[Client_Moneycard]  WITH CHECK ADD  CONSTRAINT [FK_Client_Moneycard_Moneycard] FOREIGN KEY([Moneycard_ID])
+REFERENCES [dbo].[Moneycard] ([ID])
+GO
+IF  EXISTS (SELECT * FROM sys.foreign_keys WHERE object_id = OBJECT_ID(N'[dbo].[FK_Client_Moneycard_Moneycard]') AND parent_object_id = OBJECT_ID(N'[dbo].[Client_Moneycard]'))
+ALTER TABLE [dbo].[Client_Moneycard] CHECK CONSTRAINT [FK_Client_Moneycard_Moneycard]
+GO
+/****** Object:  ForeignKey [FK_Client_Payee_Client]    Script Date: 07/10/2017 18:54:22 ******/
+IF NOT EXISTS (SELECT * FROM sys.foreign_keys WHERE object_id = OBJECT_ID(N'[dbo].[FK_Client_Payee_Client]') AND parent_object_id = OBJECT_ID(N'[dbo].[Client_Payee]'))
+ALTER TABLE [dbo].[Client_Payee]  WITH CHECK ADD  CONSTRAINT [FK_Client_Payee_Client] FOREIGN KEY([Client_ID])
+REFERENCES [dbo].[Client] ([ID])
+GO
+IF  EXISTS (SELECT * FROM sys.foreign_keys WHERE object_id = OBJECT_ID(N'[dbo].[FK_Client_Payee_Client]') AND parent_object_id = OBJECT_ID(N'[dbo].[Client_Payee]'))
+ALTER TABLE [dbo].[Client_Payee] CHECK CONSTRAINT [FK_Client_Payee_Client]
+GO
+/****** Object:  ForeignKey [FK_Client_Payee_Payee]    Script Date: 07/10/2017 18:54:22 ******/
+IF NOT EXISTS (SELECT * FROM sys.foreign_keys WHERE object_id = OBJECT_ID(N'[dbo].[FK_Client_Payee_Payee]') AND parent_object_id = OBJECT_ID(N'[dbo].[Client_Payee]'))
+ALTER TABLE [dbo].[Client_Payee]  WITH CHECK ADD  CONSTRAINT [FK_Client_Payee_Payee] FOREIGN KEY([Payee_ID])
+REFERENCES [dbo].[Payee] ([ID])
+GO
+IF  EXISTS (SELECT * FROM sys.foreign_keys WHERE object_id = OBJECT_ID(N'[dbo].[FK_Client_Payee_Payee]') AND parent_object_id = OBJECT_ID(N'[dbo].[Client_Payee]'))
+ALTER TABLE [dbo].[Client_Payee] CHECK CONSTRAINT [FK_Client_Payee_Payee]
+GO
+/****** Object:  ForeignKey [FK_Client_SecurityQuestion_Client]    Script Date: 07/10/2017 18:54:22 ******/
+IF NOT EXISTS (SELECT * FROM sys.foreign_keys WHERE object_id = OBJECT_ID(N'[dbo].[FK_Client_SecurityQuestion_Client]') AND parent_object_id = OBJECT_ID(N'[dbo].[Client_SecurityQuestion]'))
+ALTER TABLE [dbo].[Client_SecurityQuestion]  WITH CHECK ADD  CONSTRAINT [FK_Client_SecurityQuestion_Client] FOREIGN KEY([Client_ID])
+REFERENCES [dbo].[Client] ([ID])
+GO
+IF  EXISTS (SELECT * FROM sys.foreign_keys WHERE object_id = OBJECT_ID(N'[dbo].[FK_Client_SecurityQuestion_Client]') AND parent_object_id = OBJECT_ID(N'[dbo].[Client_SecurityQuestion]'))
+ALTER TABLE [dbo].[Client_SecurityQuestion] CHECK CONSTRAINT [FK_Client_SecurityQuestion_Client]
+GO
+/****** Object:  ForeignKey [FK_Client_SecurityQuestion_SecurityQuestion]    Script Date: 07/10/2017 18:54:22 ******/
+IF NOT EXISTS (SELECT * FROM sys.foreign_keys WHERE object_id = OBJECT_ID(N'[dbo].[FK_Client_SecurityQuestion_SecurityQuestion]') AND parent_object_id = OBJECT_ID(N'[dbo].[Client_SecurityQuestion]'))
+ALTER TABLE [dbo].[Client_SecurityQuestion]  WITH CHECK ADD  CONSTRAINT [FK_Client_SecurityQuestion_SecurityQuestion] FOREIGN KEY([Question_ID])
+REFERENCES [dbo].[SecurityQuestion] ([ID])
+GO
+IF  EXISTS (SELECT * FROM sys.foreign_keys WHERE object_id = OBJECT_ID(N'[dbo].[FK_Client_SecurityQuestion_SecurityQuestion]') AND parent_object_id = OBJECT_ID(N'[dbo].[Client_SecurityQuestion]'))
+ALTER TABLE [dbo].[Client_SecurityQuestion] CHECK CONSTRAINT [FK_Client_SecurityQuestion_SecurityQuestion]
+GO
+/****** Object:  ForeignKey [FK_Client_Transaction_Client]    Script Date: 07/10/2017 18:54:22 ******/
+IF NOT EXISTS (SELECT * FROM sys.foreign_keys WHERE object_id = OBJECT_ID(N'[dbo].[FK_Client_Transaction_Client]') AND parent_object_id = OBJECT_ID(N'[dbo].[Client_Transaction]'))
+ALTER TABLE [dbo].[Client_Transaction]  WITH CHECK ADD  CONSTRAINT [FK_Client_Transaction_Client] FOREIGN KEY([Client_ID])
+REFERENCES [dbo].[Client] ([ID])
+GO
+IF  EXISTS (SELECT * FROM sys.foreign_keys WHERE object_id = OBJECT_ID(N'[dbo].[FK_Client_Transaction_Client]') AND parent_object_id = OBJECT_ID(N'[dbo].[Client_Transaction]'))
+ALTER TABLE [dbo].[Client_Transaction] CHECK CONSTRAINT [FK_Client_Transaction_Client]
+GO
+/****** Object:  ForeignKey [FK_Client_Transaction_Transaction]    Script Date: 07/10/2017 18:54:22 ******/
+IF NOT EXISTS (SELECT * FROM sys.foreign_keys WHERE object_id = OBJECT_ID(N'[dbo].[FK_Client_Transaction_Transaction]') AND parent_object_id = OBJECT_ID(N'[dbo].[Client_Transaction]'))
+ALTER TABLE [dbo].[Client_Transaction]  WITH CHECK ADD  CONSTRAINT [FK_Client_Transaction_Transaction] FOREIGN KEY([Transaction_ID])
+REFERENCES [dbo].[Transaction] ([ID])
+GO
+IF  EXISTS (SELECT * FROM sys.foreign_keys WHERE object_id = OBJECT_ID(N'[dbo].[FK_Client_Transaction_Transaction]') AND parent_object_id = OBJECT_ID(N'[dbo].[Client_Transaction]'))
+ALTER TABLE [dbo].[Client_Transaction] CHECK CONSTRAINT [FK_Client_Transaction_Transaction]
+GO
